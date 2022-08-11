@@ -13,6 +13,7 @@ The chosen OLTP data set is about Baseball tournaments and related areas. It has
 - Teams – Details about teams (TEXT file)
 
 ## Solution architecture 
+![](images/SA.jpg)
 
 ## Data warehouse design & development 
 Snowflake schema is designed as the dimensional model.
