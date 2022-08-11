@@ -17,17 +17,22 @@ The chosen OLTP data set is about Baseball tournaments and related areas. It has
 
 ## Data warehouse design & development 
 Snowflake schema is designed as the dimensional model.
+![](images/DM.png)
 
 
 ## ETL development 
 Data extraction, transformation and loading using SSIS.
+![](images/ETL.png)
 
 
 ## SSAS Cube implementation
 Creating data source, data source view and deploying the SSAS cube.
+![](images/cube.png)
 
 ## Demonstration of OLAP operations
 Connecting Excel workbook to the cube using PowerPivot. Demonstrating Roll-up, Drill-down, Slice, Dice, Pivot.
+![](images/OLAP.png)
+![](images/rollup.png)
 
 
 ## Tools and technologies
