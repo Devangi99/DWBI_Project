@@ -26,7 +26,7 @@ Data extraction, transformation and loading using SSIS.
 Creating data source, data source view and deploying the SSAS cube.
 
 ## Demonstration of OLAP operations
-Connecting Excel workbook to the cube using PowerPivot.
+Connecting Excel workbook to the cube using PowerPivot. Demonstrating Roll-up, Drill-down, Slice, Dice, Pivot.
 
 
 ## Tools and technologies
