@@ -1,0 +1,23 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.28307.1831
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{D2ABAB84-BF74-430A-B69E-9DC6D40DDA17}") = "Bassball_Logs_SSAS", "Bassball_Logs_SSAS\Bassball_Logs_SSAS.dwproj", "{62A0CA62-6C28-494B-AF01-AEA8DDB608AE}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Development|Default = Development|Default
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{62A0CA62-6C28-494B-AF01-AEA8DDB608AE}.Development|Default.ActiveCfg = Development
+		{62A0CA62-6C28-494B-AF01-AEA8DDB608AE}.Development|Default.Build.0 = Development
+		{62A0CA62-6C28-494B-AF01-AEA8DDB608AE}.Development|Default.Deploy.0 = Development
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {5C737334-E69C-48A2-BD54-42399FA212D4}
+	EndGlobalSection
+EndGlobal

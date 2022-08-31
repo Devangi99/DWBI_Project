@@ -1,0 +1,89 @@
+﻿<DeploymentSnapshot xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ddl2="http://schemas.microsoft.com/analysisservices/2003/engine/2" xmlns:ddl2_2="http://schemas.microsoft.com/analysisservices/2003/engine/2/2" xmlns:ddl100_100="http://schemas.microsoft.com/analysisservices/2008/engine/100/100" xmlns:ddl200="http://schemas.microsoft.com/analysisservices/2010/engine/200" xmlns:ddl200_200="http://schemas.microsoft.com/analysisservices/2010/engine/200/200" xmlns:ddl300="http://schemas.microsoft.com/analysisservices/2011/engine/300" xmlns:ddl300_300="http://schemas.microsoft.com/analysisservices/2011/engine/300/300" xmlns:ddl400="http://schemas.microsoft.com/analysisservices/2012/engine/400" xmlns:ddl400_400="http://schemas.microsoft.com/analysisservices/2012/engine/400/400" xmlns:ddl500="http://schemas.microsoft.com/analysisservices/2013/engine/500" xmlns:ddl500_500="http://schemas.microsoft.com/analysisservices/2013/engine/500/500" xmlns:dwd="http://schemas.microsoft.com/DataWarehouse/Designer/1.0">
+  <Target>
+    <Database>Bassball_Logs_SSAS</Database>
+    <Server>localhost</Server>
+    <ConnectionString>Data Source=localhost;Timeout=0</ConnectionString>
+  </Target>
+  <Options>
+    <TransactionalDeployment>false</TransactionalDeployment>
+    <PartitionDeployment>DeployPartitions</PartitionDeployment>
+    <RoleDeployment>DeployRolesRetainMembers</RoleDeployment>
+    <ProcessingOption>Default</ProcessingOption>
+    <OutputScript></OutputScript>
+    <ImpactAnalysisFile></ImpactAnalysisFile>
+    <ConfigurationSettingsDeployment>Deploy</ConfigurationSettingsDeployment>
+    <OptimizationSettingsDeployment>Deploy</OptimizationSettingsDeployment>
+    <WriteBackTableCreation>UseExisting</WriteBackTableCreation>
+  </Options>
+  <Snapshot>
+    <ObjectSnapshots>
+      <ObjectSnapshot>
+        <Type>Microsoft.AnalysisServices.RelationalDataSource</Type>
+        <TimeStamp>sCQTWRq+94yVkE/TybNPLflIYwo=5/17/2022 3:18:31 AM5/17/2022 2:16:12 AM</TimeStamp>
+        <ID>
+          <String>DS_Baseball_Logs_DW</String>
+        </ID>
+      </ObjectSnapshot>
+      <ObjectSnapshot>
+        <Type>Microsoft.AnalysisServices.DataSourceView</Type>
+        <TimeStamp>FNobrG1fR2QjKqq2LAz/hA6Hihg=5/17/2022 2:39:19 AM5/17/2022 2:26:25 AM</TimeStamp>
+        <ID>
+          <String>DSV_Baseball_Logs_DW</String>
+        </ID>
+      </ObjectSnapshot>
+      <ObjectSnapshot>
+        <Type>Microsoft.AnalysisServices.Dimension</Type>
+        <TimeStamp>kM3l/QUEDfWIWePgkj48vORmz/g=5/17/2022 2:51:45 AM5/17/2022 2:39:18 AM</TimeStamp>
+        <ID>
+          <String>Dim Date</String>
+        </ID>
+      </ObjectSnapshot>
+      <ObjectSnapshot>
+        <Type>Microsoft.AnalysisServices.Dimension</Type>
+        <TimeStamp>QInHP9fhsQBgCUV5wCksYnU2BHk=5/17/2022 2:54:13 AM5/17/2022 2:39:18 AM</TimeStamp>
+        <ID>
+          <String>Dim Teams</String>
+        </ID>
+      </ObjectSnapshot>
+      <ObjectSnapshot>
+        <Type>Microsoft.AnalysisServices.Dimension</Type>
+        <TimeStamp>8J/5d7gIIV7tA8n4+xfEVDJj6fc=5/17/2022 2:46:10 AM5/17/2022 2:39:18 AM</TimeStamp>
+        <ID>
+          <String>Dim Baseball Players</String>
+        </ID>
+      </ObjectSnapshot>
+      <ObjectSnapshot>
+        <Type>Microsoft.AnalysisServices.Dimension</Type>
+        <TimeStamp>Nhchp/Vte6q2FIRVOR/fHqryfqc=5/17/2022 11:25:09 AM5/17/2022 11:23:29 AM</TimeStamp>
+        <ID>
+          <String>Dim Salaries</String>
+        </ID>
+      </ObjectSnapshot>
+      <ObjectSnapshot>
+        <Type>Microsoft.AnalysisServices.Dimension</Type>
+        <TimeStamp>uRaJ+qr1x74chGiixIsc06+ZnBI=5/17/2022 11:28:07 AM5/17/2022 11:25:45 AM</TimeStamp>
+        <ID>
+          <String>Dim Series Post</String>
+        </ID>
+      </ObjectSnapshot>
+      <ObjectSnapshot>
+        <Type>Microsoft.AnalysisServices.Cube</Type>
+        <TimeStamp>iqHGwNS8X2Ig7hIzDe4Ls/Z3qyw=5/17/2022 2:54:13 AM5/17/2022 2:39:18 AMKxrIVms9DJZzV0dOeKYPWRyPGxc=5/17/2022 2:39:19 AM5/17/2022 2:39:18 AM</TimeStamp>
+        <ID>
+          <String>Cube_Baseball_Logs</String>
+        </ID>
+      </ObjectSnapshot>
+    </ObjectSnapshots>
+    <DatabaseSnapshot>
+      <Type>Microsoft.AnalysisServices.Database</Type>
+      <TimeStamp>XYOIE1cgZ2g9GfD40QLpKQu0uo4=5/17/2022 1:52:17 AM5/17/2022 1:52:16 AM</TimeStamp>
+      <ID>
+        <String>Bassball_Logs_SSAS</String>
+      </ID>
+    </DatabaseSnapshot>
+    <Granularity>Coarse</Granularity>
+  </Snapshot>
+  <AssemblyLocations />
+  <ProcessingComplete>true</ProcessingComplete>
+  <LastDeployed>2022-05-17T05:59:17.336667Z</LastDeployed>
+</DeploymentSnapshot>

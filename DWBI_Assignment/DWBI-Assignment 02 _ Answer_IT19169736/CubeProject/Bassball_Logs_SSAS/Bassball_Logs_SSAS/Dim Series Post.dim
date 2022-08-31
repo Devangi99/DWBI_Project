@@ -1,0 +1,349 @@
+﻿<Dimension xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ddl2="http://schemas.microsoft.com/analysisservices/2003/engine/2" xmlns:ddl2_2="http://schemas.microsoft.com/analysisservices/2003/engine/2/2" xmlns:ddl100_100="http://schemas.microsoft.com/analysisservices/2008/engine/100/100" xmlns:ddl200="http://schemas.microsoft.com/analysisservices/2010/engine/200" xmlns:ddl200_200="http://schemas.microsoft.com/analysisservices/2010/engine/200/200" xmlns:ddl300="http://schemas.microsoft.com/analysisservices/2011/engine/300" xmlns:ddl300_300="http://schemas.microsoft.com/analysisservices/2011/engine/300/300" xmlns:ddl400="http://schemas.microsoft.com/analysisservices/2012/engine/400" xmlns:ddl400_400="http://schemas.microsoft.com/analysisservices/2012/engine/400/400" xmlns:ddl500="http://schemas.microsoft.com/analysisservices/2013/engine/500" xmlns:ddl500_500="http://schemas.microsoft.com/analysisservices/2013/engine/500/500" xmlns:dwd="http://schemas.microsoft.com/DataWarehouse/Designer/1.0" dwd:design-time-name="d1800cb9-ff49-46a2-84db-d0be05b38a64" xmlns="http://schemas.microsoft.com/analysisservices/2003/engine">
+  <ID>Dim Series Post</ID>
+  <Name>Dim Series Post</Name>
+  <CreatedTimestamp>0001-01-01T00:00:00Z</CreatedTimestamp>
+  <LastSchemaUpdate>0001-01-01T00:00:00Z</LastSchemaUpdate>
+  <Annotations>
+    <Annotation>
+      <Name>http://schemas.microsoft.com/DataWarehouse/Designer/1.0:DiagramLayout</Name>
+      <Value>
+        <dds xmlns="">
+          <diagram fontclsid="{0BE35203-8F91-11CE-9DE3-00AA004BB851}" mouseiconclsid="{0BE35204-8F91-11CE-9DE3-00AA004BB851}" defaultlayout="MSDDS.Rectilinear" defaultlineroute="MSDDS.Rectilinear" version="7" nextobject="5" scale="100" pagebreakanchorx="0" pagebreakanchory="0" pagebreaksizex="0" pagebreaksizey="0" scrollleft="-1567" scrolltop="-732" gridx="150" gridy="150" marginx="5000" marginy="5000" zoom="100" x="7324" y="14309" backcolor="16777215" defaultpersistence="2" PrintPageNumbersMode="3" PrintMarginTop="0" PrintMarginBottom="635" PrintMarginLeft="0" PrintMarginRight="0" marqueeselectionmode="0" mousepointer="0" snaptogrid="0" autotypeannotation="1" showscrollbars="0" viewpagebreaks="0" donotforceconnectorsbehindshapes="1" backpictureclsid="{00000000-0000-0000-0000-000000000000}">
+            <font>
+              <ddsxmlobjectstreamwrapper binary="010000009001b0300100065461686f6d61" />
+            </font>
+            <mouseicon>
+              <ddsxmlobjectstreamwrapper binary="6c74000000000000" />
+            </mouseicon>
+          </diagram>
+          <layoutmanager>
+            <ddsxmlobj />
+          </layoutmanager>
+          <ddscontrol controlprogid="DdsShapes.DdsObjectManagedBridge" tooltip="DimTeams" left="20" top="0" logicalid="1" controlid="1" masterid="0" hint1="0" hint2="0" width="3704" height="5000" noresize="0" nomove="0" nodefaultattachpoints="0" autodrag="1" usedefaultiddshape="1" selectable="1" showselectionhandles="1" allownudging="1" isannotation="0" dontautolayout="0" groupcollapsed="0" tabstop="1" visible="1" snaptogrid="0">
+            <control>
+              <ddsxmlobjectstreaminitwrapper binary="000e0000780e000088130000" />
+            </control>
+            <layoutobject>
+              <ddsxmlobj>
+                <property name="LogicalObject" value="dbo_DimTeams" vartype="8" />
+              </ddsxmlobj>
+            </layoutobject>
+            <shape groupshapeid="0" groupnode="0" />
+          </ddscontrol>
+          <ddscontrol controlprogid="DdsShapes.DdsObjectManagedBridge" tooltip="DimSeriesPost" left="168" top="7400" logicalid="2" controlid="2" masterid="0" hint1="0" hint2="0" width="3408" height="5000" noresize="0" nomove="0" nodefaultattachpoints="0" autodrag="1" usedefaultiddshape="1" selectable="1" showselectionhandles="1" allownudging="1" isannotation="0" dontautolayout="0" groupcollapsed="0" tabstop="1" visible="1" snaptogrid="0">
+            <control>
+              <ddsxmlobjectstreaminitwrapper binary="000e0000500d000088130000" />
+            </control>
+            <layoutobject>
+              <ddsxmlobj>
+                <property name="LogicalObject" value="dbo_DimSeriesPost" vartype="8" />
+              </ddsxmlobj>
+            </layoutobject>
+            <shape groupshapeid="0" groupnode="0" />
+          </ddscontrol>
+          <ddscontrol controlprogid="MSDDS.Polyline" left="1473" top="4501" logicalid="3" controlid="3" masterid="0" hint1="0" hint2="0" width="799" height="3199" noresize="0" nomove="0" nodefaultattachpoints="1" autodrag="0" usedefaultiddshape="0" selectable="1" showselectionhandles="0" allownudging="1" isannotation="0" dontautolayout="0" groupcollapsed="0" tabstop="1" visible="1" snaptogrid="0">
+            <control>
+              <ddsxmlobj>
+                <polyline endtypedst="6" endtypesrc="3" usercolor="0" linestyle="0" linerender="1" customendtypedstid="0" customendtypesrcid="0" adornsvisible="1" />
+              </ddsxmlobj>
+            </control>
+            <layoutobject>
+              <ddsxmlobj>
+                <property name="LogicalObject" value="dataSet.Relations[FK__DimSeries__teamI__286302EC]" vartype="8" />
+                <property name="Virtual" value="0" vartype="11" />
+                <property name="VisibleAP" value="0" vartype="3" />
+              </ddsxmlobj>
+            </layoutobject>
+            <connector lineroutestyle="MSDDS.Rectilinear" sourceid="1" destid="2" sourceattachpoint="7" destattachpoint="4" segmenteditmode="0" bendpointeditmode="0" bendpointvisibility="0" relatedid="0" virtual="0">
+              <point x="1872" y="5000" />
+              <point x="1872" y="7400" />
+            </connector>
+          </ddscontrol>
+          <ddscontrol controlprogid="MSDDS.Polyline" left="2023" top="4501" logicalid="4" controlid="4" masterid="0" hint1="0" hint2="0" width="799" height="3199" noresize="0" nomove="0" nodefaultattachpoints="1" autodrag="0" usedefaultiddshape="0" selectable="1" showselectionhandles="0" allownudging="1" isannotation="0" dontautolayout="0" groupcollapsed="0" tabstop="1" visible="1" snaptogrid="0">
+            <control>
+              <ddsxmlobj>
+                <polyline endtypedst="6" endtypesrc="3" usercolor="0" linestyle="0" linerender="1" customendtypedstid="0" customendtypesrcid="0" adornsvisible="1" />
+              </ddsxmlobj>
+            </control>
+            <layoutobject>
+              <ddsxmlobj>
+                <property name="LogicalObject" value="dataSet.Relations[FK__DimSeries__teamI__29572725]" vartype="8" />
+                <property name="Virtual" value="0" vartype="11" />
+                <property name="VisibleAP" value="0" vartype="3" />
+              </ddsxmlobj>
+            </layoutobject>
+            <connector lineroutestyle="MSDDS.Rectilinear" sourceid="1" destid="2" sourceattachpoint="9" destattachpoint="6" segmenteditmode="0" bendpointeditmode="0" bendpointvisibility="0" relatedid="0" virtual="0">
+              <point x="2422" y="5000" />
+              <point x="2422" y="7400" />
+            </connector>
+          </ddscontrol>
+        </dds>
+      </Value>
+    </Annotation>
+    <Annotation>
+      <Name>http://schemas.microsoft.com/DataWarehouse/Designer/1.0:ShowFriendlyNames</Name>
+      <Value>true</Value>
+    </Annotation>
+    <Annotation>
+      <Name>http://schemas.microsoft.com/DataWarehouse/Designer/1.0:ShowRelationshipNames</Name>
+      <Value>false</Value>
+    </Annotation>
+    <Annotation>
+      <Name>http://schemas.microsoft.com/DataWarehouse/Designer/1.0:UseDiagramDefaultLayout</Name>
+      <Value>true</Value>
+    </Annotation>
+    <Annotation>
+      <Name>http://schemas.microsoft.com/DataWarehouse/Designer/1.0:DiagramViewPortLeft</Name>
+      <Value>-1567</Value>
+    </Annotation>
+    <Annotation>
+      <Name>http://schemas.microsoft.com/DataWarehouse/Designer/1.0:DiagramViewPortTop</Name>
+      <Value>-732</Value>
+    </Annotation>
+    <Annotation>
+      <Name>http://schemas.microsoft.com/DataWarehouse/Designer/1.0:DiagramBoundingLeft</Name>
+      <Value>20</Value>
+    </Annotation>
+    <Annotation>
+      <Name>http://schemas.microsoft.com/DataWarehouse/Designer/1.0:DiagramBoundingTop</Name>
+      <Value>0</Value>
+    </Annotation>
+    <Annotation>
+      <Name>http://schemas.microsoft.com/DataWarehouse/Designer/1.0:DiagramZoom</Name>
+      <Value>100</Value>
+    </Annotation>
+  </Annotations>
+  <LastProcessed>0001-01-01T00:00:00Z</LastProcessed>
+  <State>Unprocessed</State>
+  <Source xsi:type="DataSourceViewBinding" dwd:design-time-name="22722ae8-8bc9-453b-91b7-b8ac7b6a8d90">
+    <DataSourceViewID>DSV_Baseball_Logs_DW</DataSourceViewID>
+  </Source>
+  <UnknownMember>Visible</UnknownMember>
+  <ErrorConfiguration dwd:design-time-name="cdb090b9-7f69-4151-8f3c-fee7a627e84f">
+    <KeyNotFound>ReportAndStop</KeyNotFound>
+    <KeyDuplicate>ReportAndStop</KeyDuplicate>
+    <NullKeyNotAllowed>ReportAndStop</NullKeyNotAllowed>
+  </ErrorConfiguration>
+  <CurrentStorageMode>Molap</CurrentStorageMode>
+  <Attributes>
+    <Attribute dwd:design-time-name="c292e6bb-6b65-4729-96ec-8dfe09daff0c">
+      <ID>Series SK</ID>
+      <Name>Series SK</Name>
+      <Usage>Key</Usage>
+      <KeyColumns>
+        <KeyColumn dwd:design-time-name="349f0b97-45c2-4188-9aa2-4be8a526667b">
+          <DataType>Integer</DataType>
+          <Source xsi:type="ColumnBinding" dwd:design-time-name="06ebcd08-abd4-4b1a-9dbf-5a1f6c509cd6">
+            <TableID>dbo_DimSeriesPost</TableID>
+            <ColumnID>seriesSK</ColumnID>
+          </Source>
+        </KeyColumn>
+      </KeyColumns>
+      <AttributeRelationships>
+        <AttributeRelationship dwd:design-time-name="a3d05c62-8852-49d5-8cc0-d41406433407">
+          <AttributeID>Team SK</AttributeID>
+          <Name>Team SK</Name>
+        </AttributeRelationship>
+        <AttributeRelationship dwd:design-time-name="47777e17-dfa3-4ddc-92a0-c5a63f0df726">
+          <AttributeID>Alternate Series ID</AttributeID>
+          <Name>Alternate Series ID</Name>
+        </AttributeRelationship>
+        <AttributeRelationship dwd:design-time-name="72594e9b-4e6f-4d98-a81d-69cf6eda24ee">
+          <AttributeID>Year ID</AttributeID>
+          <Name>Year ID</Name>
+        </AttributeRelationship>
+        <AttributeRelationship dwd:design-time-name="dcacd846-329a-4f98-a671-0bf2ded1188a">
+          <AttributeID>Round</AttributeID>
+          <Name>Round</Name>
+        </AttributeRelationship>
+        <AttributeRelationship dwd:design-time-name="ba759171-46f3-45ed-b07e-9b2fe71a946d">
+          <AttributeID>Team I Dwinner Key</AttributeID>
+          <Name>Team I Dwinner Key</Name>
+        </AttributeRelationship>
+        <AttributeRelationship dwd:design-time-name="b214e3a5-f2f0-4d6b-8333-b2fccfc1e24a">
+          <AttributeID>Lg I Dwinner</AttributeID>
+          <Name>Lg I Dwinner</Name>
+        </AttributeRelationship>
+        <AttributeRelationship dwd:design-time-name="1210dd57-72ba-4faa-ba49-d75a05c24db5">
+          <AttributeID>Team I Dloser Key</AttributeID>
+          <Name>Team I Dloser Key</Name>
+        </AttributeRelationship>
+        <AttributeRelationship dwd:design-time-name="b4d32be9-c940-41f7-9b95-f4d93fa0e611">
+          <AttributeID>Wins</AttributeID>
+          <Name>Wins</Name>
+        </AttributeRelationship>
+        <AttributeRelationship dwd:design-time-name="5d34d112-e07d-4049-bd3b-f9c8f0c8c28e">
+          <AttributeID>Losses</AttributeID>
+          <Name>Losses</Name>
+        </AttributeRelationship>
+        <AttributeRelationship dwd:design-time-name="341b5320-5cd8-40e5-809c-d684b23ac8ec">
+          <AttributeID>Ties</AttributeID>
+          <Name>Ties</Name>
+        </AttributeRelationship>
+      </AttributeRelationships>
+      <OrderBy>Key</OrderBy>
+      <ddl200:ProcessingState>Unprocessed</ddl200:ProcessingState>
+      <ddl300:AttributeHierarchyProcessingState>Unprocessed</ddl300:AttributeHierarchyProcessingState>
+    </Attribute>
+    <Attribute dwd:design-time-name="76c29b21-9245-4d28-a8e0-73619c3c437f">
+      <ID>Team SK</ID>
+      <Name>Team SK</Name>
+      <KeyColumns>
+        <KeyColumn dwd:design-time-name="a52ac4d7-f35b-4c32-b901-27364d0e77af">
+          <DataType>Integer</DataType>
+          <NullProcessing>UnknownMember</NullProcessing>
+          <Source xsi:type="ColumnBinding" dwd:design-time-name="3ed8acd3-9a0e-4e5f-83f1-55539c9ec6e5">
+            <TableID>dbo_DimTeams</TableID>
+            <ColumnID>teamSK</ColumnID>
+          </Source>
+        </KeyColumn>
+      </KeyColumns>
+      <OrderBy>Key</OrderBy>
+      <ddl200:ProcessingState>Unprocessed</ddl200:ProcessingState>
+      <ddl300:AttributeHierarchyProcessingState>Unprocessed</ddl300:AttributeHierarchyProcessingState>
+    </Attribute>
+    <Attribute dwd:design-time-name="b7a5533d-1a63-4ffc-936a-45fd783c3a40">
+      <ID>Alternate Series ID</ID>
+      <Name>Alternate Series ID</Name>
+      <KeyColumns>
+        <KeyColumn dwd:design-time-name="d70c77ac-796a-488b-a134-d7984915643d">
+          <DataType>WChar</DataType>
+          <DataSize>50</DataSize>
+          <Source xsi:type="ColumnBinding" dwd:design-time-name="e93b7dcc-71cb-4bd1-8dff-15531c22f0c4">
+            <TableID>dbo_DimSeriesPost</TableID>
+            <ColumnID>AlternateSeriesID</ColumnID>
+          </Source>
+        </KeyColumn>
+      </KeyColumns>
+      <ddl200:ProcessingState>Unprocessed</ddl200:ProcessingState>
+      <ddl300:AttributeHierarchyProcessingState>Unprocessed</ddl300:AttributeHierarchyProcessingState>
+    </Attribute>
+    <Attribute dwd:design-time-name="da9adc02-440d-45f0-8b65-2b741a74e212">
+      <ID>Year ID</ID>
+      <Name>Year ID</Name>
+      <KeyColumns>
+        <KeyColumn dwd:design-time-name="5fb3f917-c483-4ac7-b80e-9732ef848c40">
+          <DataType>WChar</DataType>
+          <DataSize>50</DataSize>
+          <Source xsi:type="ColumnBinding" dwd:design-time-name="e0146c15-0d35-4436-b3a2-50f849f2773d">
+            <TableID>dbo_DimSeriesPost</TableID>
+            <ColumnID>yearID</ColumnID>
+          </Source>
+        </KeyColumn>
+      </KeyColumns>
+      <ddl200:ProcessingState>Unprocessed</ddl200:ProcessingState>
+      <ddl300:AttributeHierarchyProcessingState>Unprocessed</ddl300:AttributeHierarchyProcessingState>
+    </Attribute>
+    <Attribute dwd:design-time-name="9da407a4-e7f4-419a-a24a-eb2bf076486d">
+      <ID>Round</ID>
+      <Name>Round</Name>
+      <KeyColumns>
+        <KeyColumn dwd:design-time-name="7ef8785b-a348-444b-abfe-6d38c2eb707c">
+          <DataType>WChar</DataType>
+          <DataSize>50</DataSize>
+          <Source xsi:type="ColumnBinding" dwd:design-time-name="feecd525-1b02-4ee8-8392-513eb3fc1660">
+            <TableID>dbo_DimSeriesPost</TableID>
+            <ColumnID>round</ColumnID>
+          </Source>
+        </KeyColumn>
+      </KeyColumns>
+      <ddl200:ProcessingState>Unprocessed</ddl200:ProcessingState>
+      <ddl300:AttributeHierarchyProcessingState>Unprocessed</ddl300:AttributeHierarchyProcessingState>
+    </Attribute>
+    <Attribute dwd:design-time-name="10081a54-f39c-4ce8-8a0b-3123e0d12983">
+      <ID>Team I Dwinner Key</ID>
+      <Name>Team I Dwinner Key</Name>
+      <KeyColumns>
+        <KeyColumn dwd:design-time-name="7c1c55d4-5910-453d-8f43-872967fd19eb">
+          <DataType>Integer</DataType>
+          <Source xsi:type="ColumnBinding" dwd:design-time-name="a606558d-f162-41de-b1af-c042c0e84281">
+            <TableID>dbo_DimSeriesPost</TableID>
+            <ColumnID>teamIDwinnerKey</ColumnID>
+          </Source>
+        </KeyColumn>
+      </KeyColumns>
+      <ddl200:ProcessingState>Unprocessed</ddl200:ProcessingState>
+      <ddl300:AttributeHierarchyProcessingState>Unprocessed</ddl300:AttributeHierarchyProcessingState>
+    </Attribute>
+    <Attribute dwd:design-time-name="e8ef4abd-afdb-4a49-b2b7-1e382b10db41">
+      <ID>Lg I Dwinner</ID>
+      <Name>Lg I Dwinner</Name>
+      <KeyColumns>
+        <KeyColumn dwd:design-time-name="1f9d5811-b64f-4f29-b0dc-cd63ddfbec09">
+          <DataType>WChar</DataType>
+          <DataSize>50</DataSize>
+          <Source xsi:type="ColumnBinding" dwd:design-time-name="6b25f500-ca9e-406f-be13-a61fcdb50992">
+            <TableID>dbo_DimSeriesPost</TableID>
+            <ColumnID>lgIDwinner</ColumnID>
+          </Source>
+        </KeyColumn>
+      </KeyColumns>
+      <ddl200:ProcessingState>Unprocessed</ddl200:ProcessingState>
+      <ddl300:AttributeHierarchyProcessingState>Unprocessed</ddl300:AttributeHierarchyProcessingState>
+    </Attribute>
+    <Attribute dwd:design-time-name="1f897a7a-5752-4b35-8b55-dbeab1629e20">
+      <ID>Team I Dloser Key</ID>
+      <Name>Team I Dloser Key</Name>
+      <KeyColumns>
+        <KeyColumn dwd:design-time-name="8cea10bd-7f8e-4843-b10e-b119926e70f2">
+          <DataType>Integer</DataType>
+          <Source xsi:type="ColumnBinding" dwd:design-time-name="9a00c227-2385-4293-9139-5ee0dac6d28d">
+            <TableID>dbo_DimSeriesPost</TableID>
+            <ColumnID>teamIDloserKey</ColumnID>
+          </Source>
+        </KeyColumn>
+      </KeyColumns>
+      <ddl200:ProcessingState>Unprocessed</ddl200:ProcessingState>
+      <ddl300:AttributeHierarchyProcessingState>Unprocessed</ddl300:AttributeHierarchyProcessingState>
+    </Attribute>
+    <Attribute dwd:design-time-name="c593aa1c-a40a-4bb2-a4f1-bd65cdae2573">
+      <ID>Wins</ID>
+      <Name>Wins</Name>
+      <KeyColumns>
+        <KeyColumn dwd:design-time-name="264b83a1-410d-4190-950d-0dff7b931a63">
+          <DataType>WChar</DataType>
+          <DataSize>50</DataSize>
+          <Source xsi:type="ColumnBinding" dwd:design-time-name="a879eae0-a6f4-48f1-b167-f7c205c354ae">
+            <TableID>dbo_DimSeriesPost</TableID>
+            <ColumnID>wins</ColumnID>
+          </Source>
+        </KeyColumn>
+      </KeyColumns>
+      <ddl200:ProcessingState>Unprocessed</ddl200:ProcessingState>
+      <ddl300:AttributeHierarchyProcessingState>Unprocessed</ddl300:AttributeHierarchyProcessingState>
+    </Attribute>
+    <Attribute dwd:design-time-name="269dfea7-6954-4e85-b493-b2df6bb3d783">
+      <ID>Losses</ID>
+      <Name>Losses</Name>
+      <KeyColumns>
+        <KeyColumn dwd:design-time-name="5d269526-84d0-44d9-b1a4-a48d198bcccf">
+          <DataType>WChar</DataType>
+          <DataSize>50</DataSize>
+          <Source xsi:type="ColumnBinding" dwd:design-time-name="3c0a7d0e-690b-428a-bb51-764c89402973">
+            <TableID>dbo_DimSeriesPost</TableID>
+            <ColumnID>losses</ColumnID>
+          </Source>
+        </KeyColumn>
+      </KeyColumns>
+      <ddl200:ProcessingState>Unprocessed</ddl200:ProcessingState>
+      <ddl300:AttributeHierarchyProcessingState>Unprocessed</ddl300:AttributeHierarchyProcessingState>
+    </Attribute>
+    <Attribute dwd:design-time-name="d7a40539-ce93-44d1-9e4f-90ebd8cf6d30">
+      <ID>Ties</ID>
+      <Name>Ties</Name>
+      <KeyColumns>
+        <KeyColumn dwd:design-time-name="3af5aeb4-eafc-4122-95c2-cd26648fefa0">
+          <DataType>WChar</DataType>
+          <DataSize>50</DataSize>
+          <Source xsi:type="ColumnBinding" dwd:design-time-name="64654c7f-bfb9-478a-84fa-ec0526df0c2d">
+            <TableID>dbo_DimSeriesPost</TableID>
+            <ColumnID>ties</ColumnID>
+          </Source>
+        </KeyColumn>
+      </KeyColumns>
+      <ddl200:ProcessingState>Unprocessed</ddl200:ProcessingState>
+      <ddl300:AttributeHierarchyProcessingState>Unprocessed</ddl300:AttributeHierarchyProcessingState>
+    </Attribute>
+  </Attributes>
+  <ddl300:ProcessingState>Unprocessed</ddl300:ProcessingState>
+</Dimension>

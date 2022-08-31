@@ -1,0 +1,2120 @@
+﻿<?xml version="1.0"?>
+<DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:refId="Package"
+  DTS:CreationDate="5/14/2022 9:36:52 PM"
+  DTS:CreationName="Microsoft.Package"
+  DTS:CreatorComputerName="UDG99"
+  DTS:CreatorName="UDG99\Devangi"
+  DTS:DTSID="{F4339C25-F82B-485F-B037-0FB0069BA2AA}"
+  DTS:ExecutableType="Microsoft.Package"
+  DTS:LastModifiedProductVersion="15.0.2000.170"
+  DTS:LocaleID="1033"
+  DTS:ObjectName="Accumulating_Fact_Design"
+  DTS:PackageType="5"
+  DTS:VersionBuild="4"
+  DTS:VersionGUID="{35017620-E88C-4335-B5FD-9B1327D2E890}">
+  <DTS:Property
+    DTS:Name="PackageFormatVersion">8</DTS:Property>
+  <DTS:ConnectionManagers>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[Flat File Connection Manager]"
+      DTS:CreationName="FLATFILE"
+      DTS:DTSID="{9856998F-D30E-40FB-9747-D2D225794F0A}"
+      DTS:ObjectName="Flat File Connection Manager">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:Format="Delimited"
+          DTS:LocaleID="1033"
+          DTS:HeaderRowDelimiter="_x000D__x000A_"
+          DTS:ColumnNamesInFirstDataRow="True"
+          DTS:RowDelimiter=""
+          DTS:TextQualifier="_x003C_none_x003E_"
+          DTS:CodePage="1252"
+          DTS:ConnectionString="C:\BaseballDataset\times.csv">
+          <DTS:FlatFileColumns>
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="50"
+              DTS:DataType="130"
+              DTS:TextQualified="True"
+              DTS:ObjectName="ï»¿filedingID"
+              DTS:DTSID="{7C849D7F-BCDB-4CC5-A974-011A2CF9542C}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x000D__x000A_"
+              DTS:DataType="135"
+              DTS:TextQualified="True"
+              DTS:ObjectName="accm_txn_complete_time"
+              DTS:DTSID="{67A58A0F-7CD2-47C5-ACE0-6674B1E78440}"
+              DTS:CreationName="" />
+          </DTS:FlatFileColumns>
+        </DTS:ConnectionManager>
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[UDG99.Baseball_Logs_DW]"
+      DTS:CreationName="OLEDB"
+      DTS:DTSID="{34BF0AA9-B8C5-4080-BB29-390B17D468EE}"
+      DTS:ObjectName="UDG99.Baseball_Logs_DW">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectRetryCount="1"
+          DTS:ConnectRetryInterval="5"
+          DTS:ConnectionString="Data Source=UDG99;Initial Catalog=Baseball_Logs_DW;Provider=SQLNCLI11.1;Integrated Security=SSPI;Auto Translate=False;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+  </DTS:ConnectionManagers>
+  <DTS:Variables />
+  <DTS:Executables>
+    <DTS:Executable
+      DTS:refId="Package\Accumulating Fact Fielding Table"
+      DTS:CreationName="Microsoft.Pipeline"
+      DTS:Description="Data Flow Task"
+      DTS:DTSID="{CBB42EC0-7F4C-41D9-96AF-ABE819BCB5C0}"
+      DTS:ExecutableType="Microsoft.Pipeline"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Accumulating Fact Fielding Table"
+      DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <pipeline
+          version="1">
+          <components>
+            <component
+              refId="Package\Accumulating Fact Fielding Table\Adding complete time"
+              componentClassID="Microsoft.DerivedColumn"
+              contactInfo="Derived Column;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
+              description="Creates new column values by applying expressions to transformation input columns. Create new columns or overwrite existing ones. For example, concatenate the values from the 'first name' and 'last name' column to make a 'full name' column."
+              name="Adding complete time"
+              usesDispositions="true">
+              <inputs>
+                <input
+                  refId="Package\Accumulating Fact Fielding Table\Adding complete time.Inputs[Derived Column Input]"
+                  description="Input to the Derived Column Transformation"
+                  name="Derived Column Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Accumulating Fact Fielding Table\Adding complete time.Inputs[Derived Column Input].Columns[accm_txn_complete_time]"
+                      cachedDataType="dbTimeStamp"
+                      cachedName="accm_txn_complete_time"
+                      lineageId="Package\Accumulating Fact Fielding Table\Merge Join.Outputs[Merge Join Output].Columns[accm_txn_complete_time]" />
+                    <inputColumn
+                      refId="Package\Accumulating Fact Fielding Table\Adding complete time.Inputs[Derived Column Input].Columns[accm_txn_create_time]"
+                      cachedDataType="dbTimeStamp"
+                      cachedName="accm_txn_create_time"
+                      lineageId="Package\Accumulating Fact Fielding Table\Merge Join.Outputs[Merge Join Output].Columns[accm_txn_create_time]" />
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Accumulating Fact Fielding Table\Adding complete time.Outputs[Derived Column Output]"
+                  description="Default Output of the Derived Column Transformation"
+                  exclusionGroup="1"
+                  name="Derived Column Output"
+                  synchronousInputId="Package\Accumulating Fact Fielding Table\Adding complete time.Inputs[Derived Column Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Accumulating Fact Fielding Table\Adding complete time.Outputs[Derived Column Output].Columns[CompleteTime]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Computation"
+                      errorRowDisposition="FailComponent"
+                      lineageId="Package\Accumulating Fact Fielding Table\Adding complete time.Outputs[Derived Column Output].Columns[CompleteTime]"
+                      name="CompleteTime"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Expression"
+                          name="Expression">[DATEDIFF]("hh",#{Package\Accumulating Fact Fielding Table\Merge Join.Outputs[Merge Join Output].Columns[accm_txn_create_time]},#{Package\Accumulating Fact Fielding Table\Merge Join.Outputs[Merge Join Output].Columns[accm_txn_complete_time]})</property>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Friendly Expression"
+                          expressionType="Notify"
+                          name="FriendlyExpression">DATEDIFF("hh",accm_txn_create_time,accm_txn_complete_time)</property>
+                      </properties>
+                    </outputColumn>
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\Accumulating Fact Fielding Table\Adding complete time.Outputs[Derived Column Error Output]"
+                  description="Error Output of the Derived Column Transformation"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="Derived Column Error Output"
+                  synchronousInputId="Package\Accumulating Fact Fielding Table\Adding complete time.Inputs[Derived Column Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Accumulating Fact Fielding Table\Adding complete time.Outputs[Derived Column Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Accumulating Fact Fielding Table\Adding complete time.Outputs[Derived Column Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Accumulating Fact Fielding Table\Adding complete time.Outputs[Derived Column Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Accumulating Fact Fielding Table\Adding complete time.Outputs[Derived Column Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Accumulating Fact Fielding Table\Extract from FactFielding Table"
+              componentClassID="Microsoft.OLEDBSource"
+              contactInfo="OLE DB Source;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;7"
+              description="OLE DB Source"
+              name="Extract from FactFielding Table"
+              usesDispositions="true"
+              version="7">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset">[dbo].[FactFielding]</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor"></property>
+                <property
+                  dataType="System.String"
+                  description="The variable that contains the SQL command to be executed."
+                  name="SqlCommandVariable"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">0</property>
+                <property
+                  dataType="System.String"
+                  description="The mappings between the parameters in the SQL command and variables."
+                  name="ParameterMapping"></property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Accumulating Fact Fielding Table\Extract from FactFielding Table.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[UDG99.Baseball_Logs_DW]"
+                  connectionManagerRefId="Package.ConnectionManagers[UDG99.Baseball_Logs_DW]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <outputs>
+                <output
+                  refId="Package\Accumulating Fact Fielding Table\Extract from FactFielding Table.Outputs[OLE DB Source Output]"
+                  name="OLE DB Source Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Accumulating Fact Fielding Table\Extract from FactFielding Table.Outputs[OLE DB Source Output].Columns[fieldingID]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Accumulating Fact Fielding Table\Extract from FactFielding Table.Outputs[OLE DB Source Output].ExternalColumns[fieldingID]"
+                      length="50"
+                      lineageId="Package\Accumulating Fact Fielding Table\Extract from FactFielding Table.Outputs[OLE DB Source Output].Columns[fieldingID]"
+                      name="fieldingID"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Accumulating Fact Fielding Table\Extract from FactFielding Table.Outputs[OLE DB Source Output].Columns[playerIDKey]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Accumulating Fact Fielding Table\Extract from FactFielding Table.Outputs[OLE DB Source Output].ExternalColumns[playerIDKey]"
+                      lineageId="Package\Accumulating Fact Fielding Table\Extract from FactFielding Table.Outputs[OLE DB Source Output].Columns[playerIDKey]"
+                      name="playerIDKey"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Accumulating Fact Fielding Table\Extract from FactFielding Table.Outputs[OLE DB Source Output].Columns[yearIDKey]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Accumulating Fact Fielding Table\Extract from FactFielding Table.Outputs[OLE DB Source Output].ExternalColumns[yearIDKey]"
+                      lineageId="Package\Accumulating Fact Fielding Table\Extract from FactFielding Table.Outputs[OLE DB Source Output].Columns[yearIDKey]"
+                      name="yearIDKey"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Accumulating Fact Fielding Table\Extract from FactFielding Table.Outputs[OLE DB Source Output].Columns[stint]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Accumulating Fact Fielding Table\Extract from FactFielding Table.Outputs[OLE DB Source Output].ExternalColumns[stint]"
+                      length="50"
+                      lineageId="Package\Accumulating Fact Fielding Table\Extract from FactFielding Table.Outputs[OLE DB Source Output].Columns[stint]"
+                      name="stint"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Accumulating Fact Fielding Table\Extract from FactFielding Table.Outputs[OLE DB Source Output].Columns[teamIDKey]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Accumulating Fact Fielding Table\Extract from FactFielding Table.Outputs[OLE DB Source Output].ExternalColumns[teamIDKey]"
+                      lineageId="Package\Accumulating Fact Fielding Table\Extract from FactFielding Table.Outputs[OLE DB Source Output].Columns[teamIDKey]"
+                      name="teamIDKey"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Accumulating Fact Fielding Table\Extract from FactFielding Table.Outputs[OLE DB Source Output].Columns[league]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Accumulating Fact Fielding Table\Extract from FactFielding Table.Outputs[OLE DB Source Output].ExternalColumns[league]"
+                      length="50"
+                      lineageId="Package\Accumulating Fact Fielding Table\Extract from FactFielding Table.Outputs[OLE DB Source Output].Columns[league]"
+                      name="league"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Accumulating Fact Fielding Table\Extract from FactFielding Table.Outputs[OLE DB Source Output].Columns[position]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Accumulating Fact Fielding Table\Extract from FactFielding Table.Outputs[OLE DB Source Output].ExternalColumns[position]"
+                      length="50"
+                      lineageId="Package\Accumulating Fact Fielding Table\Extract from FactFielding Table.Outputs[OLE DB Source Output].Columns[position]"
+                      name="position"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Accumulating Fact Fielding Table\Extract from FactFielding Table.Outputs[OLE DB Source Output].Columns[gamesPlayed]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Accumulating Fact Fielding Table\Extract from FactFielding Table.Outputs[OLE DB Source Output].ExternalColumns[gamesPlayed]"
+                      length="50"
+                      lineageId="Package\Accumulating Fact Fielding Table\Extract from FactFielding Table.Outputs[OLE DB Source Output].Columns[gamesPlayed]"
+                      name="gamesPlayed"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Accumulating Fact Fielding Table\Extract from FactFielding Table.Outputs[OLE DB Source Output].Columns[putouts]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Accumulating Fact Fielding Table\Extract from FactFielding Table.Outputs[OLE DB Source Output].ExternalColumns[putouts]"
+                      length="50"
+                      lineageId="Package\Accumulating Fact Fielding Table\Extract from FactFielding Table.Outputs[OLE DB Source Output].Columns[putouts]"
+                      name="putouts"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Accumulating Fact Fielding Table\Extract from FactFielding Table.Outputs[OLE DB Source Output].Columns[assists]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Accumulating Fact Fielding Table\Extract from FactFielding Table.Outputs[OLE DB Source Output].ExternalColumns[assists]"
+                      length="50"
+                      lineageId="Package\Accumulating Fact Fielding Table\Extract from FactFielding Table.Outputs[OLE DB Source Output].Columns[assists]"
+                      name="assists"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Accumulating Fact Fielding Table\Extract from FactFielding Table.Outputs[OLE DB Source Output].Columns[errors]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Accumulating Fact Fielding Table\Extract from FactFielding Table.Outputs[OLE DB Source Output].ExternalColumns[errors]"
+                      length="50"
+                      lineageId="Package\Accumulating Fact Fielding Table\Extract from FactFielding Table.Outputs[OLE DB Source Output].Columns[errors]"
+                      name="errors"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Accumulating Fact Fielding Table\Extract from FactFielding Table.Outputs[OLE DB Source Output].Columns[doublePlays]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Accumulating Fact Fielding Table\Extract from FactFielding Table.Outputs[OLE DB Source Output].ExternalColumns[doublePlays]"
+                      length="50"
+                      lineageId="Package\Accumulating Fact Fielding Table\Extract from FactFielding Table.Outputs[OLE DB Source Output].Columns[doublePlays]"
+                      name="doublePlays"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Accumulating Fact Fielding Table\Extract from FactFielding Table.Outputs[OLE DB Source Output].Columns[ModifiedDate]"
+                      dataType="dbTimeStamp"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Accumulating Fact Fielding Table\Extract from FactFielding Table.Outputs[OLE DB Source Output].ExternalColumns[ModifiedDate]"
+                      lineageId="Package\Accumulating Fact Fielding Table\Extract from FactFielding Table.Outputs[OLE DB Source Output].Columns[ModifiedDate]"
+                      name="ModifiedDate"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Accumulating Fact Fielding Table\Extract from FactFielding Table.Outputs[OLE DB Source Output].Columns[accm_txn_create_time]"
+                      dataType="dbTimeStamp"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Accumulating Fact Fielding Table\Extract from FactFielding Table.Outputs[OLE DB Source Output].ExternalColumns[accm_txn_create_time]"
+                      lineageId="Package\Accumulating Fact Fielding Table\Extract from FactFielding Table.Outputs[OLE DB Source Output].Columns[accm_txn_create_time]"
+                      name="accm_txn_create_time"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Accumulating Fact Fielding Table\Extract from FactFielding Table.Outputs[OLE DB Source Output].Columns[accm_txn_complete_time]"
+                      dataType="dbTimeStamp"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Accumulating Fact Fielding Table\Extract from FactFielding Table.Outputs[OLE DB Source Output].ExternalColumns[accm_txn_complete_time]"
+                      lineageId="Package\Accumulating Fact Fielding Table\Extract from FactFielding Table.Outputs[OLE DB Source Output].Columns[accm_txn_complete_time]"
+                      name="accm_txn_complete_time"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Accumulating Fact Fielding Table\Extract from FactFielding Table.Outputs[OLE DB Source Output].Columns[txn_process_time_hours]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Accumulating Fact Fielding Table\Extract from FactFielding Table.Outputs[OLE DB Source Output].ExternalColumns[txn_process_time_hours]"
+                      lineageId="Package\Accumulating Fact Fielding Table\Extract from FactFielding Table.Outputs[OLE DB Source Output].Columns[txn_process_time_hours]"
+                      name="txn_process_time_hours"
+                      truncationRowDisposition="FailComponent" />
+                  </outputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Accumulating Fact Fielding Table\Extract from FactFielding Table.Outputs[OLE DB Source Output].ExternalColumns[fieldingID]"
+                      dataType="wstr"
+                      length="50"
+                      name="fieldingID" />
+                    <externalMetadataColumn
+                      refId="Package\Accumulating Fact Fielding Table\Extract from FactFielding Table.Outputs[OLE DB Source Output].ExternalColumns[playerIDKey]"
+                      dataType="i4"
+                      name="playerIDKey" />
+                    <externalMetadataColumn
+                      refId="Package\Accumulating Fact Fielding Table\Extract from FactFielding Table.Outputs[OLE DB Source Output].ExternalColumns[yearIDKey]"
+                      dataType="i4"
+                      name="yearIDKey" />
+                    <externalMetadataColumn
+                      refId="Package\Accumulating Fact Fielding Table\Extract from FactFielding Table.Outputs[OLE DB Source Output].ExternalColumns[stint]"
+                      dataType="wstr"
+                      length="50"
+                      name="stint" />
+                    <externalMetadataColumn
+                      refId="Package\Accumulating Fact Fielding Table\Extract from FactFielding Table.Outputs[OLE DB Source Output].ExternalColumns[teamIDKey]"
+                      dataType="i4"
+                      name="teamIDKey" />
+                    <externalMetadataColumn
+                      refId="Package\Accumulating Fact Fielding Table\Extract from FactFielding Table.Outputs[OLE DB Source Output].ExternalColumns[league]"
+                      dataType="wstr"
+                      length="50"
+                      name="league" />
+                    <externalMetadataColumn
+                      refId="Package\Accumulating Fact Fielding Table\Extract from FactFielding Table.Outputs[OLE DB Source Output].ExternalColumns[position]"
+                      dataType="wstr"
+                      length="50"
+                      name="position" />
+                    <externalMetadataColumn
+                      refId="Package\Accumulating Fact Fielding Table\Extract from FactFielding Table.Outputs[OLE DB Source Output].ExternalColumns[gamesPlayed]"
+                      dataType="wstr"
+                      length="50"
+                      name="gamesPlayed" />
+                    <externalMetadataColumn
+                      refId="Package\Accumulating Fact Fielding Table\Extract from FactFielding Table.Outputs[OLE DB Source Output].ExternalColumns[putouts]"
+                      dataType="wstr"
+                      length="50"
+                      name="putouts" />
+                    <externalMetadataColumn
+                      refId="Package\Accumulating Fact Fielding Table\Extract from FactFielding Table.Outputs[OLE DB Source Output].ExternalColumns[assists]"
+                      dataType="wstr"
+                      length="50"
+                      name="assists" />
+                    <externalMetadataColumn
+                      refId="Package\Accumulating Fact Fielding Table\Extract from FactFielding Table.Outputs[OLE DB Source Output].ExternalColumns[errors]"
+                      dataType="wstr"
+                      length="50"
+                      name="errors" />
+                    <externalMetadataColumn
+                      refId="Package\Accumulating Fact Fielding Table\Extract from FactFielding Table.Outputs[OLE DB Source Output].ExternalColumns[doublePlays]"
+                      dataType="wstr"
+                      length="50"
+                      name="doublePlays" />
+                    <externalMetadataColumn
+                      refId="Package\Accumulating Fact Fielding Table\Extract from FactFielding Table.Outputs[OLE DB Source Output].ExternalColumns[ModifiedDate]"
+                      dataType="dbTimeStamp"
+                      name="ModifiedDate" />
+                    <externalMetadataColumn
+                      refId="Package\Accumulating Fact Fielding Table\Extract from FactFielding Table.Outputs[OLE DB Source Output].ExternalColumns[accm_txn_create_time]"
+                      dataType="dbTimeStamp"
+                      name="accm_txn_create_time" />
+                    <externalMetadataColumn
+                      refId="Package\Accumulating Fact Fielding Table\Extract from FactFielding Table.Outputs[OLE DB Source Output].ExternalColumns[accm_txn_complete_time]"
+                      dataType="dbTimeStamp"
+                      name="accm_txn_complete_time" />
+                    <externalMetadataColumn
+                      refId="Package\Accumulating Fact Fielding Table\Extract from FactFielding Table.Outputs[OLE DB Source Output].ExternalColumns[txn_process_time_hours]"
+                      dataType="i4"
+                      name="txn_process_time_hours" />
+                  </externalMetadataColumns>
+                </output>
+                <output
+                  refId="Package\Accumulating Fact Fielding Table\Extract from FactFielding Table.Outputs[OLE DB Source Error Output]"
+                  isErrorOut="true"
+                  name="OLE DB Source Error Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Accumulating Fact Fielding Table\Extract from FactFielding Table.Outputs[OLE DB Source Error Output].Columns[fieldingID]"
+                      dataType="wstr"
+                      length="50"
+                      lineageId="Package\Accumulating Fact Fielding Table\Extract from FactFielding Table.Outputs[OLE DB Source Error Output].Columns[fieldingID]"
+                      name="fieldingID" />
+                    <outputColumn
+                      refId="Package\Accumulating Fact Fielding Table\Extract from FactFielding Table.Outputs[OLE DB Source Error Output].Columns[playerIDKey]"
+                      dataType="i4"
+                      lineageId="Package\Accumulating Fact Fielding Table\Extract from FactFielding Table.Outputs[OLE DB Source Error Output].Columns[playerIDKey]"
+                      name="playerIDKey" />
+                    <outputColumn
+                      refId="Package\Accumulating Fact Fielding Table\Extract from FactFielding Table.Outputs[OLE DB Source Error Output].Columns[yearIDKey]"
+                      dataType="i4"
+                      lineageId="Package\Accumulating Fact Fielding Table\Extract from FactFielding Table.Outputs[OLE DB Source Error Output].Columns[yearIDKey]"
+                      name="yearIDKey" />
+                    <outputColumn
+                      refId="Package\Accumulating Fact Fielding Table\Extract from FactFielding Table.Outputs[OLE DB Source Error Output].Columns[stint]"
+                      dataType="wstr"
+                      length="50"
+                      lineageId="Package\Accumulating Fact Fielding Table\Extract from FactFielding Table.Outputs[OLE DB Source Error Output].Columns[stint]"
+                      name="stint" />
+                    <outputColumn
+                      refId="Package\Accumulating Fact Fielding Table\Extract from FactFielding Table.Outputs[OLE DB Source Error Output].Columns[teamIDKey]"
+                      dataType="i4"
+                      lineageId="Package\Accumulating Fact Fielding Table\Extract from FactFielding Table.Outputs[OLE DB Source Error Output].Columns[teamIDKey]"
+                      name="teamIDKey" />
+                    <outputColumn
+                      refId="Package\Accumulating Fact Fielding Table\Extract from FactFielding Table.Outputs[OLE DB Source Error Output].Columns[league]"
+                      dataType="wstr"
+                      length="50"
+                      lineageId="Package\Accumulating Fact Fielding Table\Extract from FactFielding Table.Outputs[OLE DB Source Error Output].Columns[league]"
+                      name="league" />
+                    <outputColumn
+                      refId="Package\Accumulating Fact Fielding Table\Extract from FactFielding Table.Outputs[OLE DB Source Error Output].Columns[position]"
+                      dataType="wstr"
+                      length="50"
+                      lineageId="Package\Accumulating Fact Fielding Table\Extract from FactFielding Table.Outputs[OLE DB Source Error Output].Columns[position]"
+                      name="position" />
+                    <outputColumn
+                      refId="Package\Accumulating Fact Fielding Table\Extract from FactFielding Table.Outputs[OLE DB Source Error Output].Columns[gamesPlayed]"
+                      dataType="wstr"
+                      length="50"
+                      lineageId="Package\Accumulating Fact Fielding Table\Extract from FactFielding Table.Outputs[OLE DB Source Error Output].Columns[gamesPlayed]"
+                      name="gamesPlayed" />
+                    <outputColumn
+                      refId="Package\Accumulating Fact Fielding Table\Extract from FactFielding Table.Outputs[OLE DB Source Error Output].Columns[putouts]"
+                      dataType="wstr"
+                      length="50"
+                      lineageId="Package\Accumulating Fact Fielding Table\Extract from FactFielding Table.Outputs[OLE DB Source Error Output].Columns[putouts]"
+                      name="putouts" />
+                    <outputColumn
+                      refId="Package\Accumulating Fact Fielding Table\Extract from FactFielding Table.Outputs[OLE DB Source Error Output].Columns[assists]"
+                      dataType="wstr"
+                      length="50"
+                      lineageId="Package\Accumulating Fact Fielding Table\Extract from FactFielding Table.Outputs[OLE DB Source Error Output].Columns[assists]"
+                      name="assists" />
+                    <outputColumn
+                      refId="Package\Accumulating Fact Fielding Table\Extract from FactFielding Table.Outputs[OLE DB Source Error Output].Columns[errors]"
+                      dataType="wstr"
+                      length="50"
+                      lineageId="Package\Accumulating Fact Fielding Table\Extract from FactFielding Table.Outputs[OLE DB Source Error Output].Columns[errors]"
+                      name="errors" />
+                    <outputColumn
+                      refId="Package\Accumulating Fact Fielding Table\Extract from FactFielding Table.Outputs[OLE DB Source Error Output].Columns[doublePlays]"
+                      dataType="wstr"
+                      length="50"
+                      lineageId="Package\Accumulating Fact Fielding Table\Extract from FactFielding Table.Outputs[OLE DB Source Error Output].Columns[doublePlays]"
+                      name="doublePlays" />
+                    <outputColumn
+                      refId="Package\Accumulating Fact Fielding Table\Extract from FactFielding Table.Outputs[OLE DB Source Error Output].Columns[ModifiedDate]"
+                      dataType="dbTimeStamp"
+                      lineageId="Package\Accumulating Fact Fielding Table\Extract from FactFielding Table.Outputs[OLE DB Source Error Output].Columns[ModifiedDate]"
+                      name="ModifiedDate" />
+                    <outputColumn
+                      refId="Package\Accumulating Fact Fielding Table\Extract from FactFielding Table.Outputs[OLE DB Source Error Output].Columns[accm_txn_create_time]"
+                      dataType="dbTimeStamp"
+                      lineageId="Package\Accumulating Fact Fielding Table\Extract from FactFielding Table.Outputs[OLE DB Source Error Output].Columns[accm_txn_create_time]"
+                      name="accm_txn_create_time" />
+                    <outputColumn
+                      refId="Package\Accumulating Fact Fielding Table\Extract from FactFielding Table.Outputs[OLE DB Source Error Output].Columns[accm_txn_complete_time]"
+                      dataType="dbTimeStamp"
+                      lineageId="Package\Accumulating Fact Fielding Table\Extract from FactFielding Table.Outputs[OLE DB Source Error Output].Columns[accm_txn_complete_time]"
+                      name="accm_txn_complete_time" />
+                    <outputColumn
+                      refId="Package\Accumulating Fact Fielding Table\Extract from FactFielding Table.Outputs[OLE DB Source Error Output].Columns[txn_process_time_hours]"
+                      dataType="i4"
+                      lineageId="Package\Accumulating Fact Fielding Table\Extract from FactFielding Table.Outputs[OLE DB Source Error Output].Columns[txn_process_time_hours]"
+                      name="txn_process_time_hours" />
+                    <outputColumn
+                      refId="Package\Accumulating Fact Fielding Table\Extract from FactFielding Table.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Accumulating Fact Fielding Table\Extract from FactFielding Table.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Accumulating Fact Fielding Table\Extract from FactFielding Table.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Accumulating Fact Fielding Table\Extract from FactFielding Table.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Accumulating Fact Fielding Table\FactFielding sort"
+              componentClassID="Microsoft.Sort"
+              contactInfo="Sort;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;1"
+              description="Sorts input data in ascending or descending order when it cannot be sorted at its source. For example, sort sales data by 'customer id' before it is written to a flat file and delivered to another department. Note: We do not recommend this transformation for large data flows."
+              name="FactFielding sort"
+              version="1">
+              <properties>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the Sort transformation removes rows with duplicate sort values."
+                  name="EliminateDuplicates">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the maximum number of threads to use for sorting."
+                  expressionType="Notify"
+                  name="MaximumThreads">-1</property>
+              </properties>
+              <inputs>
+                <input
+                  refId="Package\Accumulating Fact Fielding Table\FactFielding sort.Inputs[Sort Input]"
+                  name="Sort Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Accumulating Fact Fielding Table\FactFielding sort.Inputs[Sort Input].Columns[fieldingID]"
+                      cachedDataType="wstr"
+                      cachedLength="50"
+                      cachedName="fieldingID"
+                      lineageId="Package\Accumulating Fact Fielding Table\Extract from FactFielding Table.Outputs[OLE DB Source Output].Columns[fieldingID]">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the comparison options for character data."
+                          name="NewComparisonFlags">0</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the sort order of the column."
+                          name="NewSortKeyPosition">1</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Accumulating Fact Fielding Table\FactFielding sort.Inputs[Sort Input].Columns[playerIDKey]"
+                      cachedDataType="i4"
+                      cachedName="playerIDKey"
+                      lineageId="Package\Accumulating Fact Fielding Table\Extract from FactFielding Table.Outputs[OLE DB Source Output].Columns[playerIDKey]">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the comparison options for character data."
+                          name="NewComparisonFlags">0</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the sort order of the column."
+                          name="NewSortKeyPosition">0</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Accumulating Fact Fielding Table\FactFielding sort.Inputs[Sort Input].Columns[yearIDKey]"
+                      cachedDataType="i4"
+                      cachedName="yearIDKey"
+                      lineageId="Package\Accumulating Fact Fielding Table\Extract from FactFielding Table.Outputs[OLE DB Source Output].Columns[yearIDKey]">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the comparison options for character data."
+                          name="NewComparisonFlags">0</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the sort order of the column."
+                          name="NewSortKeyPosition">0</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Accumulating Fact Fielding Table\FactFielding sort.Inputs[Sort Input].Columns[stint]"
+                      cachedDataType="wstr"
+                      cachedLength="50"
+                      cachedName="stint"
+                      lineageId="Package\Accumulating Fact Fielding Table\Extract from FactFielding Table.Outputs[OLE DB Source Output].Columns[stint]">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the comparison options for character data."
+                          name="NewComparisonFlags">0</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the sort order of the column."
+                          name="NewSortKeyPosition">0</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Accumulating Fact Fielding Table\FactFielding sort.Inputs[Sort Input].Columns[teamIDKey]"
+                      cachedDataType="i4"
+                      cachedName="teamIDKey"
+                      lineageId="Package\Accumulating Fact Fielding Table\Extract from FactFielding Table.Outputs[OLE DB Source Output].Columns[teamIDKey]">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the comparison options for character data."
+                          name="NewComparisonFlags">0</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the sort order of the column."
+                          name="NewSortKeyPosition">0</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Accumulating Fact Fielding Table\FactFielding sort.Inputs[Sort Input].Columns[league]"
+                      cachedDataType="wstr"
+                      cachedLength="50"
+                      cachedName="league"
+                      lineageId="Package\Accumulating Fact Fielding Table\Extract from FactFielding Table.Outputs[OLE DB Source Output].Columns[league]">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the comparison options for character data."
+                          name="NewComparisonFlags">0</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the sort order of the column."
+                          name="NewSortKeyPosition">0</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Accumulating Fact Fielding Table\FactFielding sort.Inputs[Sort Input].Columns[position]"
+                      cachedDataType="wstr"
+                      cachedLength="50"
+                      cachedName="position"
+                      lineageId="Package\Accumulating Fact Fielding Table\Extract from FactFielding Table.Outputs[OLE DB Source Output].Columns[position]">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the comparison options for character data."
+                          name="NewComparisonFlags">0</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the sort order of the column."
+                          name="NewSortKeyPosition">0</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Accumulating Fact Fielding Table\FactFielding sort.Inputs[Sort Input].Columns[gamesPlayed]"
+                      cachedDataType="wstr"
+                      cachedLength="50"
+                      cachedName="gamesPlayed"
+                      lineageId="Package\Accumulating Fact Fielding Table\Extract from FactFielding Table.Outputs[OLE DB Source Output].Columns[gamesPlayed]">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the comparison options for character data."
+                          name="NewComparisonFlags">0</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the sort order of the column."
+                          name="NewSortKeyPosition">0</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Accumulating Fact Fielding Table\FactFielding sort.Inputs[Sort Input].Columns[putouts]"
+                      cachedDataType="wstr"
+                      cachedLength="50"
+                      cachedName="putouts"
+                      lineageId="Package\Accumulating Fact Fielding Table\Extract from FactFielding Table.Outputs[OLE DB Source Output].Columns[putouts]">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the comparison options for character data."
+                          name="NewComparisonFlags">0</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the sort order of the column."
+                          name="NewSortKeyPosition">0</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Accumulating Fact Fielding Table\FactFielding sort.Inputs[Sort Input].Columns[assists]"
+                      cachedDataType="wstr"
+                      cachedLength="50"
+                      cachedName="assists"
+                      lineageId="Package\Accumulating Fact Fielding Table\Extract from FactFielding Table.Outputs[OLE DB Source Output].Columns[assists]">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the comparison options for character data."
+                          name="NewComparisonFlags">0</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the sort order of the column."
+                          name="NewSortKeyPosition">0</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Accumulating Fact Fielding Table\FactFielding sort.Inputs[Sort Input].Columns[errors]"
+                      cachedDataType="wstr"
+                      cachedLength="50"
+                      cachedName="errors"
+                      lineageId="Package\Accumulating Fact Fielding Table\Extract from FactFielding Table.Outputs[OLE DB Source Output].Columns[errors]">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the comparison options for character data."
+                          name="NewComparisonFlags">0</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the sort order of the column."
+                          name="NewSortKeyPosition">0</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Accumulating Fact Fielding Table\FactFielding sort.Inputs[Sort Input].Columns[doublePlays]"
+                      cachedDataType="wstr"
+                      cachedLength="50"
+                      cachedName="doublePlays"
+                      lineageId="Package\Accumulating Fact Fielding Table\Extract from FactFielding Table.Outputs[OLE DB Source Output].Columns[doublePlays]">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the comparison options for character data."
+                          name="NewComparisonFlags">0</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the sort order of the column."
+                          name="NewSortKeyPosition">0</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Accumulating Fact Fielding Table\FactFielding sort.Inputs[Sort Input].Columns[ModifiedDate]"
+                      cachedDataType="dbTimeStamp"
+                      cachedName="ModifiedDate"
+                      lineageId="Package\Accumulating Fact Fielding Table\Extract from FactFielding Table.Outputs[OLE DB Source Output].Columns[ModifiedDate]">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the comparison options for character data."
+                          name="NewComparisonFlags">0</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the sort order of the column."
+                          name="NewSortKeyPosition">0</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Accumulating Fact Fielding Table\FactFielding sort.Inputs[Sort Input].Columns[accm_txn_create_time]"
+                      cachedDataType="dbTimeStamp"
+                      cachedName="accm_txn_create_time"
+                      lineageId="Package\Accumulating Fact Fielding Table\Extract from FactFielding Table.Outputs[OLE DB Source Output].Columns[accm_txn_create_time]">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the comparison options for character data."
+                          name="NewComparisonFlags">0</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the sort order of the column."
+                          name="NewSortKeyPosition">0</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Accumulating Fact Fielding Table\FactFielding sort.Inputs[Sort Input].Columns[accm_txn_complete_time]"
+                      cachedDataType="dbTimeStamp"
+                      cachedName="accm_txn_complete_time"
+                      lineageId="Package\Accumulating Fact Fielding Table\Extract from FactFielding Table.Outputs[OLE DB Source Output].Columns[accm_txn_complete_time]">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the comparison options for character data."
+                          name="NewComparisonFlags">0</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the sort order of the column."
+                          name="NewSortKeyPosition">0</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Accumulating Fact Fielding Table\FactFielding sort.Inputs[Sort Input].Columns[txn_process_time_hours]"
+                      cachedDataType="i4"
+                      cachedName="txn_process_time_hours"
+                      lineageId="Package\Accumulating Fact Fielding Table\Extract from FactFielding Table.Outputs[OLE DB Source Output].Columns[txn_process_time_hours]">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the comparison options for character data."
+                          name="NewComparisonFlags">0</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the sort order of the column."
+                          name="NewSortKeyPosition">0</property>
+                      </properties>
+                    </inputColumn>
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Accumulating Fact Fielding Table\FactFielding sort.Outputs[Sort Output]"
+                  isSorted="true"
+                  name="Sort Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Accumulating Fact Fielding Table\FactFielding sort.Outputs[Sort Output].Columns[fieldingID]"
+                      dataType="wstr"
+                      length="50"
+                      lineageId="Package\Accumulating Fact Fielding Table\FactFielding sort.Outputs[Sort Output].Columns[fieldingID]"
+                      name="fieldingID"
+                      sortKeyPosition="1">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the lineage identifier of the input column that is associated with this output column."
+                          name="SortColumnId">#{Package\Accumulating Fact Fielding Table\Extract from FactFielding Table.Outputs[OLE DB Source Output].Columns[fieldingID]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Accumulating Fact Fielding Table\FactFielding sort.Outputs[Sort Output].Columns[playerIDKey]"
+                      dataType="i4"
+                      lineageId="Package\Accumulating Fact Fielding Table\FactFielding sort.Outputs[Sort Output].Columns[playerIDKey]"
+                      name="playerIDKey">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the lineage identifier of the input column that is associated with this output column."
+                          name="SortColumnId">#{Package\Accumulating Fact Fielding Table\Extract from FactFielding Table.Outputs[OLE DB Source Output].Columns[playerIDKey]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Accumulating Fact Fielding Table\FactFielding sort.Outputs[Sort Output].Columns[yearIDKey]"
+                      dataType="i4"
+                      lineageId="Package\Accumulating Fact Fielding Table\FactFielding sort.Outputs[Sort Output].Columns[yearIDKey]"
+                      name="yearIDKey">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the lineage identifier of the input column that is associated with this output column."
+                          name="SortColumnId">#{Package\Accumulating Fact Fielding Table\Extract from FactFielding Table.Outputs[OLE DB Source Output].Columns[yearIDKey]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Accumulating Fact Fielding Table\FactFielding sort.Outputs[Sort Output].Columns[stint]"
+                      dataType="wstr"
+                      length="50"
+                      lineageId="Package\Accumulating Fact Fielding Table\FactFielding sort.Outputs[Sort Output].Columns[stint]"
+                      name="stint">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the lineage identifier of the input column that is associated with this output column."
+                          name="SortColumnId">#{Package\Accumulating Fact Fielding Table\Extract from FactFielding Table.Outputs[OLE DB Source Output].Columns[stint]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Accumulating Fact Fielding Table\FactFielding sort.Outputs[Sort Output].Columns[teamIDKey]"
+                      dataType="i4"
+                      lineageId="Package\Accumulating Fact Fielding Table\FactFielding sort.Outputs[Sort Output].Columns[teamIDKey]"
+                      name="teamIDKey">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the lineage identifier of the input column that is associated with this output column."
+                          name="SortColumnId">#{Package\Accumulating Fact Fielding Table\Extract from FactFielding Table.Outputs[OLE DB Source Output].Columns[teamIDKey]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Accumulating Fact Fielding Table\FactFielding sort.Outputs[Sort Output].Columns[league]"
+                      dataType="wstr"
+                      length="50"
+                      lineageId="Package\Accumulating Fact Fielding Table\FactFielding sort.Outputs[Sort Output].Columns[league]"
+                      name="league">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the lineage identifier of the input column that is associated with this output column."
+                          name="SortColumnId">#{Package\Accumulating Fact Fielding Table\Extract from FactFielding Table.Outputs[OLE DB Source Output].Columns[league]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Accumulating Fact Fielding Table\FactFielding sort.Outputs[Sort Output].Columns[position]"
+                      dataType="wstr"
+                      length="50"
+                      lineageId="Package\Accumulating Fact Fielding Table\FactFielding sort.Outputs[Sort Output].Columns[position]"
+                      name="position">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the lineage identifier of the input column that is associated with this output column."
+                          name="SortColumnId">#{Package\Accumulating Fact Fielding Table\Extract from FactFielding Table.Outputs[OLE DB Source Output].Columns[position]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Accumulating Fact Fielding Table\FactFielding sort.Outputs[Sort Output].Columns[gamesPlayed]"
+                      dataType="wstr"
+                      length="50"
+                      lineageId="Package\Accumulating Fact Fielding Table\FactFielding sort.Outputs[Sort Output].Columns[gamesPlayed]"
+                      name="gamesPlayed">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the lineage identifier of the input column that is associated with this output column."
+                          name="SortColumnId">#{Package\Accumulating Fact Fielding Table\Extract from FactFielding Table.Outputs[OLE DB Source Output].Columns[gamesPlayed]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Accumulating Fact Fielding Table\FactFielding sort.Outputs[Sort Output].Columns[putouts]"
+                      dataType="wstr"
+                      length="50"
+                      lineageId="Package\Accumulating Fact Fielding Table\FactFielding sort.Outputs[Sort Output].Columns[putouts]"
+                      name="putouts">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the lineage identifier of the input column that is associated with this output column."
+                          name="SortColumnId">#{Package\Accumulating Fact Fielding Table\Extract from FactFielding Table.Outputs[OLE DB Source Output].Columns[putouts]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Accumulating Fact Fielding Table\FactFielding sort.Outputs[Sort Output].Columns[assists]"
+                      dataType="wstr"
+                      length="50"
+                      lineageId="Package\Accumulating Fact Fielding Table\FactFielding sort.Outputs[Sort Output].Columns[assists]"
+                      name="assists">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the lineage identifier of the input column that is associated with this output column."
+                          name="SortColumnId">#{Package\Accumulating Fact Fielding Table\Extract from FactFielding Table.Outputs[OLE DB Source Output].Columns[assists]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Accumulating Fact Fielding Table\FactFielding sort.Outputs[Sort Output].Columns[errors]"
+                      dataType="wstr"
+                      length="50"
+                      lineageId="Package\Accumulating Fact Fielding Table\FactFielding sort.Outputs[Sort Output].Columns[errors]"
+                      name="errors">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the lineage identifier of the input column that is associated with this output column."
+                          name="SortColumnId">#{Package\Accumulating Fact Fielding Table\Extract from FactFielding Table.Outputs[OLE DB Source Output].Columns[errors]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Accumulating Fact Fielding Table\FactFielding sort.Outputs[Sort Output].Columns[doublePlays]"
+                      dataType="wstr"
+                      length="50"
+                      lineageId="Package\Accumulating Fact Fielding Table\FactFielding sort.Outputs[Sort Output].Columns[doublePlays]"
+                      name="doublePlays">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the lineage identifier of the input column that is associated with this output column."
+                          name="SortColumnId">#{Package\Accumulating Fact Fielding Table\Extract from FactFielding Table.Outputs[OLE DB Source Output].Columns[doublePlays]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Accumulating Fact Fielding Table\FactFielding sort.Outputs[Sort Output].Columns[ModifiedDate]"
+                      dataType="dbTimeStamp"
+                      lineageId="Package\Accumulating Fact Fielding Table\FactFielding sort.Outputs[Sort Output].Columns[ModifiedDate]"
+                      name="ModifiedDate">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the lineage identifier of the input column that is associated with this output column."
+                          name="SortColumnId">#{Package\Accumulating Fact Fielding Table\Extract from FactFielding Table.Outputs[OLE DB Source Output].Columns[ModifiedDate]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Accumulating Fact Fielding Table\FactFielding sort.Outputs[Sort Output].Columns[accm_txn_create_time]"
+                      dataType="dbTimeStamp"
+                      lineageId="Package\Accumulating Fact Fielding Table\FactFielding sort.Outputs[Sort Output].Columns[accm_txn_create_time]"
+                      name="accm_txn_create_time">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the lineage identifier of the input column that is associated with this output column."
+                          name="SortColumnId">#{Package\Accumulating Fact Fielding Table\Extract from FactFielding Table.Outputs[OLE DB Source Output].Columns[accm_txn_create_time]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Accumulating Fact Fielding Table\FactFielding sort.Outputs[Sort Output].Columns[accm_txn_complete_time]"
+                      dataType="dbTimeStamp"
+                      lineageId="Package\Accumulating Fact Fielding Table\FactFielding sort.Outputs[Sort Output].Columns[accm_txn_complete_time]"
+                      name="accm_txn_complete_time">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the lineage identifier of the input column that is associated with this output column."
+                          name="SortColumnId">#{Package\Accumulating Fact Fielding Table\Extract from FactFielding Table.Outputs[OLE DB Source Output].Columns[accm_txn_complete_time]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Accumulating Fact Fielding Table\FactFielding sort.Outputs[Sort Output].Columns[txn_process_time_hours]"
+                      dataType="i4"
+                      lineageId="Package\Accumulating Fact Fielding Table\FactFielding sort.Outputs[Sort Output].Columns[txn_process_time_hours]"
+                      name="txn_process_time_hours">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the lineage identifier of the input column that is associated with this output column."
+                          name="SortColumnId">#{Package\Accumulating Fact Fielding Table\Extract from FactFielding Table.Outputs[OLE DB Source Output].Columns[txn_process_time_hours]}</property>
+                      </properties>
+                    </outputColumn>
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Accumulating Fact Fielding Table\Flat File Source"
+              componentClassID="Microsoft.FlatFileSource"
+              contactInfo="Flat File Source;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;1"
+              description="Flat File Source"
+              localeId="1033"
+              name="Flat File Source"
+              usesDispositions="true"
+              version="1">
+              <properties>
+                <property
+                  dataType="System.Boolean"
+                  description="Specifies whether zero-length columns are treated as null."
+                  name="RetainNulls">true</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of an output column containing the file name. If no name is specified, no output column containing the file name will be generated."
+                  name="FileNameColumnName"></property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Accumulating Fact Fielding Table\Flat File Source.Connections[FlatFileConnection]"
+                  connectionManagerID="Package.ConnectionManagers[Flat File Connection Manager]"
+                  connectionManagerRefId="Package.ConnectionManagers[Flat File Connection Manager]"
+                  name="FlatFileConnection" />
+              </connections>
+              <outputs>
+                <output
+                  refId="Package\Accumulating Fact Fielding Table\Flat File Source.Outputs[Flat File Source Output]"
+                  name="Flat File Source Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Accumulating Fact Fielding Table\Flat File Source.Outputs[Flat File Source Output].Columns[ï»¿filedingID]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Accumulating Fact Fielding Table\Flat File Source.Outputs[Flat File Source Output].ExternalColumns[ï»¿filedingID]"
+                      length="50"
+                      lineageId="Package\Accumulating Fact Fielding Table\Flat File Source.Outputs[Flat File Source Output].Columns[ï»¿filedingID]"
+                      name="ï»¿filedingID"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the data is in binary format."
+                          name="UseBinaryFormat">false</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Accumulating Fact Fielding Table\Flat File Source.Outputs[Flat File Source Output].Columns[accm_txn_complete_time]"
+                      dataType="dbTimeStamp"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Accumulating Fact Fielding Table\Flat File Source.Outputs[Flat File Source Output].ExternalColumns[accm_txn_complete_time]"
+                      lineageId="Package\Accumulating Fact Fielding Table\Flat File Source.Outputs[Flat File Source Output].Columns[accm_txn_complete_time]"
+                      name="accm_txn_complete_time"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the data is in binary format."
+                          name="UseBinaryFormat">false</property>
+                      </properties>
+                    </outputColumn>
+                  </outputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Accumulating Fact Fielding Table\Flat File Source.Outputs[Flat File Source Output].ExternalColumns[ï»¿filedingID]"
+                      dataType="wstr"
+                      length="50"
+                      name="ï»¿filedingID" />
+                    <externalMetadataColumn
+                      refId="Package\Accumulating Fact Fielding Table\Flat File Source.Outputs[Flat File Source Output].ExternalColumns[accm_txn_complete_time]"
+                      dataType="dbTimeStamp"
+                      name="accm_txn_complete_time" />
+                  </externalMetadataColumns>
+                </output>
+                <output
+                  refId="Package\Accumulating Fact Fielding Table\Flat File Source.Outputs[Flat File Source Error Output]"
+                  isErrorOut="true"
+                  name="Flat File Source Error Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Accumulating Fact Fielding Table\Flat File Source.Outputs[Flat File Source Error Output].Columns[Flat File Source Error Output Column]"
+                      codePage="1252"
+                      dataType="text"
+                      description="Flat File Source Error Output Column"
+                      lineageId="Package\Accumulating Fact Fielding Table\Flat File Source.Outputs[Flat File Source Error Output].Columns[Flat File Source Error Output Column]"
+                      name="Flat File Source Error Output Column" />
+                    <outputColumn
+                      refId="Package\Accumulating Fact Fielding Table\Flat File Source.Outputs[Flat File Source Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Accumulating Fact Fielding Table\Flat File Source.Outputs[Flat File Source Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Accumulating Fact Fielding Table\Flat File Source.Outputs[Flat File Source Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Accumulating Fact Fielding Table\Flat File Source.Outputs[Flat File Source Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Accumulating Fact Fielding Table\Load Accumulating FactFielding"
+              componentClassID="Microsoft.OLEDBCommand"
+              contactInfo="OLE DB Command;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;2"
+              description="Runs an SQL statement for each row in a data flow. For example, call a 'new employee setup' stored procedure for each row in the 'new employees' table. Note: running an SQL statement for each row of a large data flow may take a long time."
+              name="Load Accumulating FactFielding"
+              usesDispositions="true"
+              version="2">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  expressionType="Notify"
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">UPDATE [dbo].[FactFielding] SET [accm_txn_complete_time] = ?, [txn_process_time_hours] =? WHERE [fieldingID] = ?</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Accumulating Fact Fielding Table\Load Accumulating FactFielding.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[UDG99.Baseball_Logs_DW]"
+                  connectionManagerRefId="Package.ConnectionManagers[UDG99.Baseball_Logs_DW]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\Accumulating Fact Fielding Table\Load Accumulating FactFielding.Inputs[OLE DB Command Input]"
+                  errorOrTruncationOperation="Command Execution"
+                  errorRowDisposition="FailComponent"
+                  hasSideEffects="true"
+                  name="OLE DB Command Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Accumulating Fact Fielding Table\Load Accumulating FactFielding.Inputs[OLE DB Command Input].Columns[accm_txn_complete_time]"
+                      cachedDataType="dbTimeStamp"
+                      cachedName="accm_txn_complete_time"
+                      externalMetadataColumnId="Package\Accumulating Fact Fielding Table\Load Accumulating FactFielding.Inputs[OLE DB Command Input].ExternalColumns[Param_0]"
+                      lineageId="Package\Accumulating Fact Fielding Table\Merge Join.Outputs[Merge Join Output].Columns[accm_txn_complete_time]" />
+                    <inputColumn
+                      refId="Package\Accumulating Fact Fielding Table\Load Accumulating FactFielding.Inputs[OLE DB Command Input].Columns[CompleteTime]"
+                      cachedDataType="i4"
+                      cachedName="CompleteTime"
+                      externalMetadataColumnId="Package\Accumulating Fact Fielding Table\Load Accumulating FactFielding.Inputs[OLE DB Command Input].ExternalColumns[Param_1]"
+                      lineageId="Package\Accumulating Fact Fielding Table\Adding complete time.Outputs[Derived Column Output].Columns[CompleteTime]" />
+                    <inputColumn
+                      refId="Package\Accumulating Fact Fielding Table\Load Accumulating FactFielding.Inputs[OLE DB Command Input].Columns[fieldingID]"
+                      cachedDataType="wstr"
+                      cachedLength="50"
+                      cachedName="fieldingID"
+                      cachedSortKeyPosition="1"
+                      externalMetadataColumnId="Package\Accumulating Fact Fielding Table\Load Accumulating FactFielding.Inputs[OLE DB Command Input].ExternalColumns[Param_2]"
+                      lineageId="Package\Accumulating Fact Fielding Table\Merge Join.Outputs[Merge Join Output].Columns[fieldingID]" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Accumulating Fact Fielding Table\Load Accumulating FactFielding.Inputs[OLE DB Command Input].ExternalColumns[Param_0]"
+                      dataType="dbTimeStamp"
+                      name="Param_0">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Parameter information.  Matches OLE DB's DBPARAMFLAGSENUM values."
+                          name="DBParamInfoFlags">65</property>
+                      </properties>
+                    </externalMetadataColumn>
+                    <externalMetadataColumn
+                      refId="Package\Accumulating Fact Fielding Table\Load Accumulating FactFielding.Inputs[OLE DB Command Input].ExternalColumns[Param_1]"
+                      dataType="i4"
+                      name="Param_1">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Parameter information.  Matches OLE DB's DBPARAMFLAGSENUM values."
+                          name="DBParamInfoFlags">81</property>
+                      </properties>
+                    </externalMetadataColumn>
+                    <externalMetadataColumn
+                      refId="Package\Accumulating Fact Fielding Table\Load Accumulating FactFielding.Inputs[OLE DB Command Input].ExternalColumns[Param_2]"
+                      dataType="wstr"
+                      length="50"
+                      name="Param_2">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Parameter information.  Matches OLE DB's DBPARAMFLAGSENUM values."
+                          name="DBParamInfoFlags">65</property>
+                      </properties>
+                    </externalMetadataColumn>
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Accumulating Fact Fielding Table\Load Accumulating FactFielding.Outputs[OLE DB Command Output]"
+                  exclusionGroup="1"
+                  name="OLE DB Command Output"
+                  synchronousInputId="Package\Accumulating Fact Fielding Table\Load Accumulating FactFielding.Inputs[OLE DB Command Input]">
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\Accumulating Fact Fielding Table\Load Accumulating FactFielding.Outputs[OLE DB Command Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="OLE DB Command Error Output"
+                  synchronousInputId="Package\Accumulating Fact Fielding Table\Load Accumulating FactFielding.Inputs[OLE DB Command Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Accumulating Fact Fielding Table\Load Accumulating FactFielding.Outputs[OLE DB Command Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Accumulating Fact Fielding Table\Load Accumulating FactFielding.Outputs[OLE DB Command Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Accumulating Fact Fielding Table\Load Accumulating FactFielding.Outputs[OLE DB Command Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Accumulating Fact Fielding Table\Load Accumulating FactFielding.Outputs[OLE DB Command Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Accumulating Fact Fielding Table\Merge Join"
+              componentClassID="Microsoft.MergeJoin"
+              contactInfo="Merge Join;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;1"
+              description="Combine two sorted data flows into one using the FULL, LEFT, or INNER join. We recommend this transformation when data flows can be sorted at their sources."
+              name="Merge Join"
+              version="1">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the type of join to perform."
+                  name="JoinType"
+                  typeConverter="JoinType">2</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the number of columns in the ordering key."
+                  name="NumKeyColumns">1</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the null values are treated as equal values."
+                  name="TreatNullsAsEqual">true</property>
+                <property
+                  dataType="System.Int32"
+                  description="Indicates the requested maximum buffers per input before blocking."
+                  name="MaxBuffersPerInput">5</property>
+              </properties>
+              <inputs>
+                <input
+                  refId="Package\Accumulating Fact Fielding Table\Merge Join.Inputs[Merge Join Left Input]"
+                  hasSideEffects="true"
+                  name="Merge Join Left Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Accumulating Fact Fielding Table\Merge Join.Inputs[Merge Join Left Input].Columns[ï»¿filedingID]"
+                      cachedDataType="wstr"
+                      cachedLength="50"
+                      cachedName="ï»¿filedingID"
+                      cachedSortKeyPosition="1"
+                      lineageId="Package\Accumulating Fact Fielding Table\times sort.Outputs[Sort Output].Columns[ï»¿filedingID]" />
+                    <inputColumn
+                      refId="Package\Accumulating Fact Fielding Table\Merge Join.Inputs[Merge Join Left Input].Columns[accm_txn_complete_time]"
+                      cachedDataType="dbTimeStamp"
+                      cachedName="accm_txn_complete_time"
+                      lineageId="Package\Accumulating Fact Fielding Table\times sort.Outputs[Sort Output].Columns[accm_txn_complete_time]" />
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+                <input
+                  refId="Package\Accumulating Fact Fielding Table\Merge Join.Inputs[Merge Join Right Input]"
+                  hasSideEffects="true"
+                  name="Merge Join Right Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Accumulating Fact Fielding Table\Merge Join.Inputs[Merge Join Right Input].Columns[fieldingID]"
+                      cachedDataType="wstr"
+                      cachedLength="50"
+                      cachedName="fieldingID"
+                      cachedSortKeyPosition="1"
+                      lineageId="Package\Accumulating Fact Fielding Table\FactFielding sort.Outputs[Sort Output].Columns[fieldingID]" />
+                    <inputColumn
+                      refId="Package\Accumulating Fact Fielding Table\Merge Join.Inputs[Merge Join Right Input].Columns[playerIDKey]"
+                      cachedDataType="i4"
+                      cachedName="playerIDKey"
+                      lineageId="Package\Accumulating Fact Fielding Table\FactFielding sort.Outputs[Sort Output].Columns[playerIDKey]" />
+                    <inputColumn
+                      refId="Package\Accumulating Fact Fielding Table\Merge Join.Inputs[Merge Join Right Input].Columns[yearIDKey]"
+                      cachedDataType="i4"
+                      cachedName="yearIDKey"
+                      lineageId="Package\Accumulating Fact Fielding Table\FactFielding sort.Outputs[Sort Output].Columns[yearIDKey]" />
+                    <inputColumn
+                      refId="Package\Accumulating Fact Fielding Table\Merge Join.Inputs[Merge Join Right Input].Columns[stint]"
+                      cachedDataType="wstr"
+                      cachedLength="50"
+                      cachedName="stint"
+                      lineageId="Package\Accumulating Fact Fielding Table\FactFielding sort.Outputs[Sort Output].Columns[stint]" />
+                    <inputColumn
+                      refId="Package\Accumulating Fact Fielding Table\Merge Join.Inputs[Merge Join Right Input].Columns[teamIDKey]"
+                      cachedDataType="i4"
+                      cachedName="teamIDKey"
+                      lineageId="Package\Accumulating Fact Fielding Table\FactFielding sort.Outputs[Sort Output].Columns[teamIDKey]" />
+                    <inputColumn
+                      refId="Package\Accumulating Fact Fielding Table\Merge Join.Inputs[Merge Join Right Input].Columns[league]"
+                      cachedDataType="wstr"
+                      cachedLength="50"
+                      cachedName="league"
+                      lineageId="Package\Accumulating Fact Fielding Table\FactFielding sort.Outputs[Sort Output].Columns[league]" />
+                    <inputColumn
+                      refId="Package\Accumulating Fact Fielding Table\Merge Join.Inputs[Merge Join Right Input].Columns[position]"
+                      cachedDataType="wstr"
+                      cachedLength="50"
+                      cachedName="position"
+                      lineageId="Package\Accumulating Fact Fielding Table\FactFielding sort.Outputs[Sort Output].Columns[position]" />
+                    <inputColumn
+                      refId="Package\Accumulating Fact Fielding Table\Merge Join.Inputs[Merge Join Right Input].Columns[gamesPlayed]"
+                      cachedDataType="wstr"
+                      cachedLength="50"
+                      cachedName="gamesPlayed"
+                      lineageId="Package\Accumulating Fact Fielding Table\FactFielding sort.Outputs[Sort Output].Columns[gamesPlayed]" />
+                    <inputColumn
+                      refId="Package\Accumulating Fact Fielding Table\Merge Join.Inputs[Merge Join Right Input].Columns[putouts]"
+                      cachedDataType="wstr"
+                      cachedLength="50"
+                      cachedName="putouts"
+                      lineageId="Package\Accumulating Fact Fielding Table\FactFielding sort.Outputs[Sort Output].Columns[putouts]" />
+                    <inputColumn
+                      refId="Package\Accumulating Fact Fielding Table\Merge Join.Inputs[Merge Join Right Input].Columns[assists]"
+                      cachedDataType="wstr"
+                      cachedLength="50"
+                      cachedName="assists"
+                      lineageId="Package\Accumulating Fact Fielding Table\FactFielding sort.Outputs[Sort Output].Columns[assists]" />
+                    <inputColumn
+                      refId="Package\Accumulating Fact Fielding Table\Merge Join.Inputs[Merge Join Right Input].Columns[errors]"
+                      cachedDataType="wstr"
+                      cachedLength="50"
+                      cachedName="errors"
+                      lineageId="Package\Accumulating Fact Fielding Table\FactFielding sort.Outputs[Sort Output].Columns[errors]" />
+                    <inputColumn
+                      refId="Package\Accumulating Fact Fielding Table\Merge Join.Inputs[Merge Join Right Input].Columns[doublePlays]"
+                      cachedDataType="wstr"
+                      cachedLength="50"
+                      cachedName="doublePlays"
+                      lineageId="Package\Accumulating Fact Fielding Table\FactFielding sort.Outputs[Sort Output].Columns[doublePlays]" />
+                    <inputColumn
+                      refId="Package\Accumulating Fact Fielding Table\Merge Join.Inputs[Merge Join Right Input].Columns[ModifiedDate]"
+                      cachedDataType="dbTimeStamp"
+                      cachedName="ModifiedDate"
+                      lineageId="Package\Accumulating Fact Fielding Table\FactFielding sort.Outputs[Sort Output].Columns[ModifiedDate]" />
+                    <inputColumn
+                      refId="Package\Accumulating Fact Fielding Table\Merge Join.Inputs[Merge Join Right Input].Columns[accm_txn_create_time]"
+                      cachedDataType="dbTimeStamp"
+                      cachedName="accm_txn_create_time"
+                      lineageId="Package\Accumulating Fact Fielding Table\FactFielding sort.Outputs[Sort Output].Columns[accm_txn_create_time]" />
+                    <inputColumn
+                      refId="Package\Accumulating Fact Fielding Table\Merge Join.Inputs[Merge Join Right Input].Columns[txn_process_time_hours]"
+                      cachedDataType="i4"
+                      cachedName="txn_process_time_hours"
+                      lineageId="Package\Accumulating Fact Fielding Table\FactFielding sort.Outputs[Sort Output].Columns[txn_process_time_hours]" />
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Accumulating Fact Fielding Table\Merge Join.Outputs[Merge Join Output]"
+                  isSorted="true"
+                  name="Merge Join Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Accumulating Fact Fielding Table\Merge Join.Outputs[Merge Join Output].Columns[accm_txn_complete_time]"
+                      dataType="dbTimeStamp"
+                      lineageId="Package\Accumulating Fact Fielding Table\Merge Join.Outputs[Merge Join Output].Columns[accm_txn_complete_time]"
+                      name="accm_txn_complete_time">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="The input column associated with this output column"
+                          name="InputColumnID">#{Package\Accumulating Fact Fielding Table\Merge Join.Inputs[Merge Join Left Input].Columns[accm_txn_complete_time]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Accumulating Fact Fielding Table\Merge Join.Outputs[Merge Join Output].Columns[fieldingID]"
+                      dataType="wstr"
+                      length="50"
+                      lineageId="Package\Accumulating Fact Fielding Table\Merge Join.Outputs[Merge Join Output].Columns[fieldingID]"
+                      name="fieldingID"
+                      sortKeyPosition="1">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="The input column associated with this output column"
+                          name="InputColumnID">#{Package\Accumulating Fact Fielding Table\Merge Join.Inputs[Merge Join Right Input].Columns[fieldingID]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Accumulating Fact Fielding Table\Merge Join.Outputs[Merge Join Output].Columns[playerIDKey]"
+                      dataType="i4"
+                      lineageId="Package\Accumulating Fact Fielding Table\Merge Join.Outputs[Merge Join Output].Columns[playerIDKey]"
+                      name="playerIDKey">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="The input column associated with this output column"
+                          name="InputColumnID">#{Package\Accumulating Fact Fielding Table\Merge Join.Inputs[Merge Join Right Input].Columns[playerIDKey]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Accumulating Fact Fielding Table\Merge Join.Outputs[Merge Join Output].Columns[yearIDKey]"
+                      dataType="i4"
+                      lineageId="Package\Accumulating Fact Fielding Table\Merge Join.Outputs[Merge Join Output].Columns[yearIDKey]"
+                      name="yearIDKey">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="The input column associated with this output column"
+                          name="InputColumnID">#{Package\Accumulating Fact Fielding Table\Merge Join.Inputs[Merge Join Right Input].Columns[yearIDKey]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Accumulating Fact Fielding Table\Merge Join.Outputs[Merge Join Output].Columns[stint]"
+                      dataType="wstr"
+                      length="50"
+                      lineageId="Package\Accumulating Fact Fielding Table\Merge Join.Outputs[Merge Join Output].Columns[stint]"
+                      name="stint">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="The input column associated with this output column"
+                          name="InputColumnID">#{Package\Accumulating Fact Fielding Table\Merge Join.Inputs[Merge Join Right Input].Columns[stint]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Accumulating Fact Fielding Table\Merge Join.Outputs[Merge Join Output].Columns[teamIDKey]"
+                      dataType="i4"
+                      lineageId="Package\Accumulating Fact Fielding Table\Merge Join.Outputs[Merge Join Output].Columns[teamIDKey]"
+                      name="teamIDKey">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="The input column associated with this output column"
+                          name="InputColumnID">#{Package\Accumulating Fact Fielding Table\Merge Join.Inputs[Merge Join Right Input].Columns[teamIDKey]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Accumulating Fact Fielding Table\Merge Join.Outputs[Merge Join Output].Columns[league]"
+                      dataType="wstr"
+                      length="50"
+                      lineageId="Package\Accumulating Fact Fielding Table\Merge Join.Outputs[Merge Join Output].Columns[league]"
+                      name="league">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="The input column associated with this output column"
+                          name="InputColumnID">#{Package\Accumulating Fact Fielding Table\Merge Join.Inputs[Merge Join Right Input].Columns[league]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Accumulating Fact Fielding Table\Merge Join.Outputs[Merge Join Output].Columns[position]"
+                      dataType="wstr"
+                      length="50"
+                      lineageId="Package\Accumulating Fact Fielding Table\Merge Join.Outputs[Merge Join Output].Columns[position]"
+                      name="position">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="The input column associated with this output column"
+                          name="InputColumnID">#{Package\Accumulating Fact Fielding Table\Merge Join.Inputs[Merge Join Right Input].Columns[position]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Accumulating Fact Fielding Table\Merge Join.Outputs[Merge Join Output].Columns[gamesPlayed]"
+                      dataType="wstr"
+                      length="50"
+                      lineageId="Package\Accumulating Fact Fielding Table\Merge Join.Outputs[Merge Join Output].Columns[gamesPlayed]"
+                      name="gamesPlayed">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="The input column associated with this output column"
+                          name="InputColumnID">#{Package\Accumulating Fact Fielding Table\Merge Join.Inputs[Merge Join Right Input].Columns[gamesPlayed]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Accumulating Fact Fielding Table\Merge Join.Outputs[Merge Join Output].Columns[putouts]"
+                      dataType="wstr"
+                      length="50"
+                      lineageId="Package\Accumulating Fact Fielding Table\Merge Join.Outputs[Merge Join Output].Columns[putouts]"
+                      name="putouts">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="The input column associated with this output column"
+                          name="InputColumnID">#{Package\Accumulating Fact Fielding Table\Merge Join.Inputs[Merge Join Right Input].Columns[putouts]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Accumulating Fact Fielding Table\Merge Join.Outputs[Merge Join Output].Columns[assists]"
+                      dataType="wstr"
+                      length="50"
+                      lineageId="Package\Accumulating Fact Fielding Table\Merge Join.Outputs[Merge Join Output].Columns[assists]"
+                      name="assists">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="The input column associated with this output column"
+                          name="InputColumnID">#{Package\Accumulating Fact Fielding Table\Merge Join.Inputs[Merge Join Right Input].Columns[assists]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Accumulating Fact Fielding Table\Merge Join.Outputs[Merge Join Output].Columns[errors]"
+                      dataType="wstr"
+                      length="50"
+                      lineageId="Package\Accumulating Fact Fielding Table\Merge Join.Outputs[Merge Join Output].Columns[errors]"
+                      name="errors">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="The input column associated with this output column"
+                          name="InputColumnID">#{Package\Accumulating Fact Fielding Table\Merge Join.Inputs[Merge Join Right Input].Columns[errors]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Accumulating Fact Fielding Table\Merge Join.Outputs[Merge Join Output].Columns[doublePlays]"
+                      dataType="wstr"
+                      length="50"
+                      lineageId="Package\Accumulating Fact Fielding Table\Merge Join.Outputs[Merge Join Output].Columns[doublePlays]"
+                      name="doublePlays">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="The input column associated with this output column"
+                          name="InputColumnID">#{Package\Accumulating Fact Fielding Table\Merge Join.Inputs[Merge Join Right Input].Columns[doublePlays]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Accumulating Fact Fielding Table\Merge Join.Outputs[Merge Join Output].Columns[ModifiedDate]"
+                      dataType="dbTimeStamp"
+                      lineageId="Package\Accumulating Fact Fielding Table\Merge Join.Outputs[Merge Join Output].Columns[ModifiedDate]"
+                      name="ModifiedDate">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="The input column associated with this output column"
+                          name="InputColumnID">#{Package\Accumulating Fact Fielding Table\Merge Join.Inputs[Merge Join Right Input].Columns[ModifiedDate]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Accumulating Fact Fielding Table\Merge Join.Outputs[Merge Join Output].Columns[accm_txn_create_time]"
+                      dataType="dbTimeStamp"
+                      lineageId="Package\Accumulating Fact Fielding Table\Merge Join.Outputs[Merge Join Output].Columns[accm_txn_create_time]"
+                      name="accm_txn_create_time">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="The input column associated with this output column"
+                          name="InputColumnID">#{Package\Accumulating Fact Fielding Table\Merge Join.Inputs[Merge Join Right Input].Columns[accm_txn_create_time]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Accumulating Fact Fielding Table\Merge Join.Outputs[Merge Join Output].Columns[txn_process_time_hours]"
+                      dataType="i4"
+                      lineageId="Package\Accumulating Fact Fielding Table\Merge Join.Outputs[Merge Join Output].Columns[txn_process_time_hours]"
+                      name="txn_process_time_hours">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="The input column associated with this output column"
+                          name="InputColumnID">#{Package\Accumulating Fact Fielding Table\Merge Join.Inputs[Merge Join Right Input].Columns[txn_process_time_hours]}</property>
+                      </properties>
+                    </outputColumn>
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Accumulating Fact Fielding Table\times sort"
+              componentClassID="Microsoft.Sort"
+              contactInfo="Sort;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;1"
+              description="Sorts input data in ascending or descending order when it cannot be sorted at its source. For example, sort sales data by 'customer id' before it is written to a flat file and delivered to another department. Note: We do not recommend this transformation for large data flows."
+              name="times sort"
+              version="1">
+              <properties>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the Sort transformation removes rows with duplicate sort values."
+                  name="EliminateDuplicates">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the maximum number of threads to use for sorting."
+                  expressionType="Notify"
+                  name="MaximumThreads">-1</property>
+              </properties>
+              <inputs>
+                <input
+                  refId="Package\Accumulating Fact Fielding Table\times sort.Inputs[Sort Input]"
+                  name="Sort Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Accumulating Fact Fielding Table\times sort.Inputs[Sort Input].Columns[ï»¿filedingID]"
+                      cachedDataType="wstr"
+                      cachedLength="50"
+                      cachedName="ï»¿filedingID"
+                      lineageId="Package\Accumulating Fact Fielding Table\Flat File Source.Outputs[Flat File Source Output].Columns[ï»¿filedingID]">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the comparison options for character data."
+                          name="NewComparisonFlags">0</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the sort order of the column."
+                          name="NewSortKeyPosition">1</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Accumulating Fact Fielding Table\times sort.Inputs[Sort Input].Columns[accm_txn_complete_time]"
+                      cachedDataType="dbTimeStamp"
+                      cachedName="accm_txn_complete_time"
+                      lineageId="Package\Accumulating Fact Fielding Table\Flat File Source.Outputs[Flat File Source Output].Columns[accm_txn_complete_time]">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the comparison options for character data."
+                          name="NewComparisonFlags">0</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the sort order of the column."
+                          name="NewSortKeyPosition">0</property>
+                      </properties>
+                    </inputColumn>
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Accumulating Fact Fielding Table\times sort.Outputs[Sort Output]"
+                  isSorted="true"
+                  name="Sort Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Accumulating Fact Fielding Table\times sort.Outputs[Sort Output].Columns[ï»¿filedingID]"
+                      dataType="wstr"
+                      length="50"
+                      lineageId="Package\Accumulating Fact Fielding Table\times sort.Outputs[Sort Output].Columns[ï»¿filedingID]"
+                      name="ï»¿filedingID"
+                      sortKeyPosition="1">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the lineage identifier of the input column that is associated with this output column."
+                          name="SortColumnId">#{Package\Accumulating Fact Fielding Table\Flat File Source.Outputs[Flat File Source Output].Columns[ï»¿filedingID]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Accumulating Fact Fielding Table\times sort.Outputs[Sort Output].Columns[accm_txn_complete_time]"
+                      dataType="dbTimeStamp"
+                      lineageId="Package\Accumulating Fact Fielding Table\times sort.Outputs[Sort Output].Columns[accm_txn_complete_time]"
+                      name="accm_txn_complete_time">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the lineage identifier of the input column that is associated with this output column."
+                          name="SortColumnId">#{Package\Accumulating Fact Fielding Table\Flat File Source.Outputs[Flat File Source Output].Columns[accm_txn_complete_time]}</property>
+                      </properties>
+                    </outputColumn>
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+          </components>
+          <paths>
+            <path
+              refId="Package\Accumulating Fact Fielding Table.Paths[Derived Column Output]"
+              endId="Package\Accumulating Fact Fielding Table\Load Accumulating FactFielding.Inputs[OLE DB Command Input]"
+              name="Derived Column Output"
+              startId="Package\Accumulating Fact Fielding Table\Adding complete time.Outputs[Derived Column Output]" />
+            <path
+              refId="Package\Accumulating Fact Fielding Table.Paths[Flat File Source Output]"
+              endId="Package\Accumulating Fact Fielding Table\times sort.Inputs[Sort Input]"
+              name="Flat File Source Output"
+              startId="Package\Accumulating Fact Fielding Table\Flat File Source.Outputs[Flat File Source Output]" />
+            <path
+              refId="Package\Accumulating Fact Fielding Table.Paths[Merge Join Output]"
+              endId="Package\Accumulating Fact Fielding Table\Adding complete time.Inputs[Derived Column Input]"
+              name="Merge Join Output"
+              startId="Package\Accumulating Fact Fielding Table\Merge Join.Outputs[Merge Join Output]" />
+            <path
+              refId="Package\Accumulating Fact Fielding Table.Paths[OLE DB Source Output]"
+              endId="Package\Accumulating Fact Fielding Table\FactFielding sort.Inputs[Sort Input]"
+              name="OLE DB Source Output"
+              startId="Package\Accumulating Fact Fielding Table\Extract from FactFielding Table.Outputs[OLE DB Source Output]" />
+            <path
+              refId="Package\Accumulating Fact Fielding Table.Paths[Sort Output]"
+              endId="Package\Accumulating Fact Fielding Table\Merge Join.Inputs[Merge Join Left Input]"
+              name="Sort Output"
+              startId="Package\Accumulating Fact Fielding Table\times sort.Outputs[Sort Output]" />
+            <path
+              refId="Package\Accumulating Fact Fielding Table.Paths[Sort Output1]"
+              endId="Package\Accumulating Fact Fielding Table\Merge Join.Inputs[Merge Join Right Input]"
+              name="Sort Output"
+              startId="Package\Accumulating Fact Fielding Table\FactFielding sort.Outputs[Sort Output]" />
+          </paths>
+        </pipeline>
+      </DTS:ObjectData>
+    </DTS:Executable>
+  </DTS:Executables>
+  <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
+<!--This CDATA section contains the layout information of the package. The section includes information such as (x,y) coordinates, width, and height.-->
+<!--If you manually edit this section and make a mistake, you can delete it. -->
+<!--The package will still be able to load normally but the previous layout information will be lost and the designer will automatically re-arrange the elements on the design surface.-->
+<Objects
+  Version="8">
+  <!--Each node below will contain properties that do not affect runtime behavior.-->
+  <Package
+    design-time-name="Package">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph">
+        <NodeLayout
+          Size="232.8,41.6"
+          Id="Package\Accumulating Fact Fielding Table"
+          TopLeft="331.428577072767,97.8823543139395" />
+      </GraphLayout>
+    </LayoutInfo>
+  </Package>
+  <TaskHost
+    design-time-name="Package\Accumulating Fact Fielding Table">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="16" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="150.4,41.6"
+          Id="Package\Accumulating Fact Fielding Table\Flat File Source"
+          TopLeft="137.857145204836,148.352943257065" />
+        <NodeLayout
+          Size="124.8,41.6"
+          Id="Package\Accumulating Fact Fielding Table\times sort"
+          TopLeft="209.285717849829,226.352944350985" />
+        <EdgeLayout
+          Id="Package\Accumulating Fact Fielding Table.Paths[Flat File Source Output]"
+          TopLeft="213.057145204836,189.952943257065">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="58.6285726449928,36.4000010939206"
+              Start="0,0"
+              End="58.6285726449928,28.9000010939206">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,14.2000005469603" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,14.2000005469603"
+                    Point2="0,18.2000005469603"
+                    Point3="4,18.2000005469603" />
+                  <mssgle:LineSegment
+                    End="54.6285726449928,18.2000005469603" />
+                  <mssgle:CubicBezierSegment
+                    Point1="54.6285726449928,18.2000005469603"
+                    Point2="58.6285726449928,18.2000005469603"
+                    Point3="58.6285726449928,22.2000005469603" />
+                  <mssgle:LineSegment
+                    End="58.6285726449928,28.9000010939206" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <NodeLayout
+          Size="180.8,41.6"
+          Id="Package\Accumulating Fact Fielding Table\Adding complete time"
+          TopLeft="332.857148525666,395.352946721146" />
+        <NodeLayout
+          Size="226.4,41.6"
+          Id="Package\Accumulating Fact Fielding Table\Load Accumulating FactFielding"
+          TopLeft="331.428577072767,461.882359418902" />
+        <EdgeLayout
+          Id="Package\Accumulating Fact Fielding Table.Paths[Derived Column Output]"
+          TopLeft="423.257148525666,436.952946721146">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="21.3714285471002,24.9294126977557"
+              Start="0,0"
+              End="21.3714285471002,17.4294126977557">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,8.46470634887783" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,8.46470634887783"
+                    Point2="0,12.4647063488778"
+                    Point3="4,12.4647063488778" />
+                  <mssgle:LineSegment
+                    End="17.3714285471002,12.4647063488778" />
+                  <mssgle:CubicBezierSegment
+                    Point1="17.3714285471002,12.4647063488778"
+                    Point2="21.3714285471002,12.4647063488778"
+                    Point3="21.3714285471002,16.4647063488778" />
+                  <mssgle:LineSegment
+                    End="21.3714285471002,17.4294126977557" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <NodeLayout
+          Size="224.8,41.6"
+          Id="Package\Accumulating Fact Fielding Table\Extract from FactFielding Table"
+          TopLeft="443.571436125405,130.211765735455" />
+        <NodeLayout
+          Size="155.2,41.6"
+          Id="Package\Accumulating Fact Fielding Table\FactFielding sort"
+          TopLeft="542.142866375495,223.505884690928" />
+        <EdgeLayout
+          Id="Package\Accumulating Fact Fielding Table.Paths[OLE DB Source Output]"
+          TopLeft="555.971436125405,171.811765735455">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="63.77143025009,51.6941189554736"
+              Start="0,0"
+              End="63.77143025009,44.1941189554736">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,21.8470594777368" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,21.8470594777368"
+                    Point2="0,25.8470594777368"
+                    Point3="4,25.8470594777368" />
+                  <mssgle:LineSegment
+                    End="59.77143025009,25.8470594777368" />
+                  <mssgle:CubicBezierSegment
+                    Point1="59.77143025009,25.8470594777368"
+                    Point2="63.77143025009,25.8470594777368"
+                    Point3="63.77143025009,29.8470594777368" />
+                  <mssgle:LineSegment
+                    End="63.77143025009,44.1941189554736" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <NodeLayout
+          Size="129.6,41.6"
+          Id="Package\Accumulating Fact Fielding Table\Merge Join"
+          TopLeft="367.142863395263,322.152944897945" />
+        <EdgeLayout
+          Id="Package\Accumulating Fact Fielding Table.Paths[Sort Output]"
+          TopLeft="271.685717849829,267.952944350985">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="160.257145545434,54.2000005469603"
+              Start="0,0"
+              End="160.257145545434,46.7000005469603">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,23.1000002734801" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,23.1000002734801"
+                    Point2="0,27.1000002734801"
+                    Point3="4,27.1000002734801" />
+                  <mssgle:LineSegment
+                    End="156.257145545434,27.1000002734801" />
+                  <mssgle:CubicBezierSegment
+                    Point1="156.257145545434,27.1000002734801"
+                    Point2="160.257145545434,27.1000002734801"
+                    Point3="160.257145545434,31.1000002734801" />
+                  <mssgle:LineSegment
+                    End="160.257145545434,46.7000005469603" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Accumulating Fact Fielding Table.Paths[Sort Output1]"
+          TopLeft="619.742866375495,265.105884690928">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="-167.533336313566,57.0470602070172"
+              Start="0,0"
+              End="-167.533336313566,49.5470602070172">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,29.8108186105004" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,29.8108186105004"
+                    Point2="0,33.8108186105004"
+                    Point3="-4,33.8108186105004" />
+                  <mssgle:LineSegment
+                    End="-163.533336313566,33.8108186105004" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-163.533336313566,33.8108186105004"
+                    Point2="-167.533336313566,33.8108186105004"
+                    Point3="-167.533336313566,37.8108186105004" />
+                  <mssgle:LineSegment
+                    End="-167.533336313566,49.5470602070172" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Accumulating Fact Fielding Table.Paths[Merge Join Output]"
+          TopLeft="431.942863395263,363.752944897945">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="-8.68571486959655,31.600001823201"
+              Start="0,0"
+              End="-8.68571486959655,24.100001823201">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,11.8000009116005" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,11.8000009116005"
+                    Point2="0,15.8000009116005"
+                    Point3="-4,15.8000009116005" />
+                  <mssgle:LineSegment
+                    End="-4.68571486959655,15.8000009116005" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-4.68571486959655,15.8000009116005"
+                    Point2="-8.68571486959655,15.8000009116005"
+                    Point3="-8.68571486959655,19.8000009116005" />
+                  <mssgle:LineSegment
+                    End="-8.68571486959655,24.100001823201" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\Accumulating Fact Fielding Table\Extract from FactFielding Table">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+</Objects>]]></DTS:DesignTimeProperties>
+</DTS:Executable>
