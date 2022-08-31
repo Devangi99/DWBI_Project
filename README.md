@@ -35,7 +35,7 @@ Connecting Excel workbook to the cube using PowerPivot. Demonstrating Roll-up, D
 ![](images/rollup.png)
 
 
-## Tools and technologies
+## Tools & technologies
 - MS SQL Server
 - SSIS
 - SSAS
