@@ -1,6 +1,6 @@
 # Data Warehousing and Business Intelligence project
 
-This project is related to the DWBI module in 1st semester of 3rd year. Following tasks are completed and demonstrated for the Baseball Databank.
+This individual project is related to the Data Warehousing and Business Intelligence module in 1st semester of 3rd year. Following tasks are completed and demonstrated for the Baseball Databank.
 
 ## Data set selection
 The chosen OLTP data set is about Baseball tournaments and related areas. It has various kind of tables with huge number of records. BaseballPlayers, Fielding, Salaries, SeriesPost and Teams were the tables used as data source. Data set is from [Kaggle](https://www.kaggle.com/)
